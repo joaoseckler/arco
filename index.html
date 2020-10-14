@@ -1,0 +1,74 @@
+<DOCTYPE html>
+  <html>
+    <head>
+      <title> jseckler </title>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+      <h2> Como criar sua página pessoal no site da arco </h2>
+
+      <p> Mande um email para jseckler arroba arco.coop.br informando
+      nome de usuário e senha desejados. Suponha para o resto dessas
+      instruções que o usuário escolhido foi <code>usuario</code>. A
+      página ficara diponível em <code>arco.coop.br/~usuario</code>
+      </p>
+
+      <p> A criação de usuário vai gerar uma pasta "home"
+      (<code>/home/usuario/</code>) e, dentro dela, uma pasta
+      <code>www</code> (<code>/home/usuario/www/</code>). Tudo que
+      estiver dentro da pasta <code>www</code> está disponível na world
+      wide web. O que estiver na sua pasta <code>home</code> mas fora da
+      pasta <code>www</code> só é acessível por você e pelo
+      administrador do servidor (no momento,
+      <a href=arco.coop.br/~jseckler)>eu</a>).
+      </p>
+
+      <p>
+      Se quiser, crie uma página html e chame-a de
+      <code>index.html</code>. Se não quiser, sua página pessoal
+      mostrará simplesmente uma lista de arquivos armazenados, um pouco
+      como essa <a href="dir-ex">daqui</a>. Um <b>jeito fácil de criar uma
+      página html</b> é escrever um documento no google docs e exportar
+      como html (arquivo -> fazer o download -> página da Web)
+      </p>
+
+
+      <br>
+      <h3> No linux ou mac</h3>
+
+      <p> instale o programa <code>scp</code></p> (em distribuições de
+      linux baseadas em debian, faça <code>$ sudo apt install scp</code>)
+
+      <p>Num terminal, copie sua página inicial para o servidor:</p>
+      <p><code>$ scp index.html usuario@arco.coop.br:~/www/</code></p>
+
+      <p>Copie uma pasta qualquer para o servidor:</p>
+      <p><code>$ scp -r pasta usuario@arco.coop.br:~/www/</code></p>
+
+      <br>
+      <h3> No windows </h3>
+      <p> Isso ainda não foi testado. Seja o primeiro a testar! </p>
+
+      <p> Abra o windows explorer -> meu computador -> botão direito ->
+      adicionar local de rede<br>
+      Local de rede personalizado<br>
+      Endereço: ftps://arco.coop.br/~usuario/<br>
+      Especifique usuário e senha<br>
+      Dê um nome para este local de rede<br>
+      Concluir
+      </p>
+
+      <p> Feito o procedimento acima, sua página pessoal aparece como
+      uma pasta para você dentro do windows explorer. Coloque seu
+      arquivo <code>index.html</code> e o que mais quiser lá dentro.
+      </p>
+
+      <br><br>
+      <p>
+      <div class="naoclique">
+        <a href="https://arco.coop.br/">clique aqui </a>
+      </div>
+      </p>
+    </body>
