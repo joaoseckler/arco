@@ -1,8 +1,39 @@
 body {
-  max-width: 500px;
+  max-width: 400px;
+  margin: auto;
+  padding: 8px;
+  font-family: sans-serif;
 }
 
+
+a {
+    text-decoration: none;
+    color: rgb(70, 70, 70);
+    transition-duration: 0.05s;
+}
+
+
+#lastchange {
+  font-size: small;
+  text-align: right;
+}
+
+.logo-image {
+  max-width: 20%;
+}
+.logo-container {
+  text-align: right;
+}
+
+.back {
+  text-align: center;
+}
 
 .naoclique:hover {
       padding: 80px 100px 0px 0px
 }
+
+a:hover {
+  background-color: rgb(230, 230, 230)
+}
+
