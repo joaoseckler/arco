@@ -57,12 +57,15 @@
 
       <br>
       <h3> No windows </h3>
-      <p> Isso ainda não foi testado. Seja o primeiro a testar! </p>
+
+      <h5> Opção 1 - Criar um "Local de rede" </h5>
+      <p><i>Já tivemos problemas com permissão de escrita usando esse
+        método. Qualquer ajuda é bem vinda!</i></p>
 
       <p>- Abra o windows explorer<br>
       &#09; -> meu computador -> botão direito -> adicionar local de rede<br>
       - Local de rede personalizado<br>
-      - Endereço: <code>arco.coop.br</code><br>
+      - Endereço: <code>ftp://arco.coop.br</code><br>
       - Especifique usuário e senha<br>
       - Dê um nome para este local de rede<br>
       - Concluir
@@ -74,10 +77,60 @@
       página pessoal na internet. Coloque seu arquivo
       <code>index.html</code> lá dentro e o que mais quiser. </p>
 
+      <h5> Opção 2 - <code>ftp</code> pelo prompt de comando </h5>
+      <p> Abra o prompt de comando (tecla windows + R, depois digite
+      "cmd" e enter). Digite <code>ftp arco.coop.br</code>. Especifique
+      usuário e senha. Aqui você tem acesso a alguns comandos:
+      <ul>
+        <li><code>put arquivo</code> para fazer upload de um arquivo</li>
+        <li><code>get arquivo</code> para fazer download de um arquivo</li>
+        <li><code>pwd</code> para imprimir o nome da pasta em que você
+          se encontra</li>
+        <li><code>cd diretorio</code> para mudar de diretório</li>
+        <li><code>ls</code> para listar os arquivos do diretório em que
+        você está</li>
+      </ul>
+
+      <p>Os nomes de arquivo usados são relativos ao diretório em que
+      você se encontra quando invocou o comando <code>ftp</code>. Se precisar,
+      especifique o caminho inteiro do arquivo (por exemplo:
+      <code>C:\Users\fulano\Downloads\arquivo</code>). Outra opção é se
+      mudar para o diretório antes de invocar o <code>ftp</code> (use,
+      por exemplo, <code>cd C:\Users\fulano\Downloads</code> ou mesmo,
+      talvez, <code>cd Downloads</code>).</p>
+
+      <p>Uma lista um pouco mais completa de comandos <code>ftp</code> está
+      disponível, por exemplo,
+      <a href="https://www.cs.colostate.edu/helpdocs/ftp.html">aqui</a>
+      </p>
+
+      <h5>Opção 3 - FileZilla</h5>
+      <p> Instale o programa <a href="https://filezilla-project.org/">
+        <code>FileZilla</code></a> e execute-o. No campo "Host", coloque
+      <code>arco.coop.br</code>. Preencha seu usuário e senha e deixe
+      o campo "Porta" em branco (estamos usando a porta padrão, que é a
+      21). Se tudo der certo, à esquerda você vai ver e manipular os
+      arquivos na sua máquina e à direita os arquivos no servidor. Se
+      Você pode começar a arrastar as coisas de um lado para o outro.
+
+      <br>
+
+      <h3>Acessando um terminal no servidor</h3>
+
+      <p>Pelo linux e mac, basta ter instalado o <code>ssh</code> (se
+      você instalou o <code>scp</code>, você já deve ter instalado o
+      <code>ssh</code> também). Daí é só mandar um <code>ssh
+      usuario@arco.coop.br</code> e fornecer o usuário e senha. No
+      windows, um cliente de <code>ssh</code> bastante usado é o
+      <a href="https://www.putty.org/">putty</a>. Nas configurações,
+      coloque <code>arco.coop.br</code> como host. Se ele perguntar,
+      estamos usando a porta 22 para <code>ssh</code>.</p>
+
       <br><br>
       <p class="back"><a href="index.html">π</a></p>
       <br>
       <p id="lastchange">
+
       Última modificação: 12-02-2021
       </p>
 

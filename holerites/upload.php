@@ -14,7 +14,7 @@
     $dir = new DirectoryIterator($upload_folder);
     foreach ($dir as $fileinfo) {
         if (!$fileinfo->isDot()) {
-            echo "<li><a href=\"" . $fileinfo->getFilename() . "\">" . $fileinfo->getFilename() . "</a></li>";
+            echo "<li><a href=\"files/" . $fileinfo->getFilename() . "\">" . $fileinfo->getFilename() . "</a></li>";
         }
     }
     echo "</ul>";
