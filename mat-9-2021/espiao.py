@@ -3,37 +3,62 @@ import subprocess as sp
 
 ESPIAO = 'O ESPIÃO!!!!'
 
+# alunos = [
+#             'Alan Camargo Goberstein',
+#             'Ana Luiza Mori Pusas',
+#             'Arthur Carneiro de Almeida Prado',
+#             'Bruno Manzano Iumatti',
+#             'Clara Utempergher Bodas Romero',
+#             'Francisco Gonçalves Côrtes',
+#             'Gabriel Justo Fernandes Corado',
+#             'Gabriela Arbex Rodrigues Cadaval',
+#             'Gaia Figueiredo Jafet',
+#             'João Danelon Vaisman',
+#             'Jonas Franco Kipersmit',
+#             'Jorge Nasser Marques de Oliveira',
+#             'Manuela Maria Cruz Saraiva',
+#             'Manuela Perez Nagamine',
+#             'Maria Eduarda Alcaldi Soares Ortega de Oliveira ',
+#             'Mateus De Mello Gonçalves',
+#             'Matheus Romão da Motta',
+#             'Paulo Antonio da Silva Lima',
+#             'Pedro Achcar Cardoso',
+#             'Pedro Torres de Carvalho Bechuate',
+#             'Alex Rosa de Souza Santos',
+#             'Tomás Gonzales Krüger',
+#             'Valentina Alcaldi Soares Ortega de Oliveira ',
+#             'Vitor Gomes de Lima'
+#         ]
+
 alunos = [
-'Alan Camargo Goberstein',
-'Ana Luiza Mori Pusas',
-'Arthur Carneiro de Almeida Prado',
-'Bruno Manzano Iumatti',
-'Clara Utempergher Bodas Romero',
-'Francisco Gonçalves Côrtes',
-'Gabriel Justo Fernandes Corado',
-'Gabriela Arbex Rodrigues Cadaval',
-'Gaia Figueiredo Jafet',
-'João Danelon Vaisman',
-'Jonas Franco Kipersmit',
-'Jorge Nasser Marques de Oliveira',
-'Manuela Maria Cruz Saraiva',
-'Manuela Perez Nagamine',
-'Maria Eduarda Alcaldi Soares Ortega de Oliveira ',
-'Mateus De Mello Gonçalves',
-'Matheus Romão da Motta',
-'Paulo Antonio da Silva Lima',
-'Pedro Achcar Cardoso',
-'Pedro Torres de Carvalho Bechuate',
-'Alex Rosa de Souza Santos',
-'Tomás Gonzales Krüger',
-'Valentina Alcaldi Soares Ortega de Oliveira ',
-'Vitor Gomes de Lima'
-        ]
+              'André Perez Calderon',
+              'Beatriz Marra Galery',
+              'Emilly Oliveira de Sousa',
+              'Francisco Ayer Toledano dos Santos ',
+              'Gabriela Pereira de Castro Casa Nova Taranto Reis',
+              'Giovana Dionísio Anraku Matsui',
+              'Heloísa Cipola Nyari',
+              'Kauê Pimentel Modern',
+              'Liz Gentile Diez de Sollano',
+              'Lorena Ferraz Otani ',
+              'Luca Brasil Fortunato',
+              'Lucas Alves Nascimento',
+              'Luiza Lanfranchi Vaz Djurovic',
+              'Marina de Oliveira Fernandes',
+              'Martin Tristão de Souza Fray Rezende',
+              'Miguel Bittencourt de Campos',
+              'Nina da Silva Lima',
+              'Pablo Gonçalves de Almeida',
+              'Tiê Fernandes Barreto Peixoto Cappucci',
+              'Violeta Luz Souza Spinola',
+              'Yasmin Santos Freire',
+              'Yuri Nakamoto Campanário',
+          ]
 
 n = len(alunos) - 1 # 1 é o espião
 
 opcoes = {
-        'aula online do Seckler':
+        'em uma aula online do Seckler':
             (n - 1) * ['um aluno'] +
             ['o Seckler'],
         'em um teatro':
@@ -42,11 +67,11 @@ opcoes = {
             ['o técnico de som'] +
             ['o diretor'] +
             (n - 9) * ['está na platéia'],
-        'na Revolução Francesa':
-            5 * ['um nobre'] +
-            5 * ['um sans cullotes'] +
-            5 * ['um girondino']  +
-            (n - 15) * ['um jacobino'],
+        # 'na Revolução Francesa':
+        #     5 * ['um nobre'] +
+        #     5 * ['um sans cullotes'] +
+        #     5 * ['um girondino']  +
+        #     (n - 15) * ['um jacobino'],
         'no "The End" (o fim) do minecraft':
             ['o Ender Dragon'] +
             5 * ['um Enderman'] +
