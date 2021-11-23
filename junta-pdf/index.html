@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <p>Aqui você poderá juntar os pdfs de uma pasta com outro pdf. Faça o
+  upload da pasta (em formato "zip"). Esse programa vai ler os
+  arquivos nessas pastas e juntar os pdfs dela com o outro pdf.</p>
+
+  <p>O zip deve conter apenas os arquivos pdfs (nenhuma pasta)</p>
+
+  <h1> Selecione o zip e o pdf</h1>
+
+  <p>
+  <form enctype="multipart/form-data" action="upload.php" method="POST">
+      Enviar arquivo pdf: <input name="userfile1" type="file" /><br>
+      Enviar arquivo zip: <input name="userfile2" type="file" /><br>
+      <input type="submit" value="Juntar!" />
+  </form>
+  </p>
+
+</body>
+</html>
