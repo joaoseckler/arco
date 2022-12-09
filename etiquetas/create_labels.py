@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
-# The server only runs python 3.5, so don't use f-strings!
+# The server only runs python 3.5, so don't use f-strings! For some
+# reason it doesn't use utf-8 for literals, so only use ascii there
 
 from fpdf import FPDF
 import csv
 import requests
+import re
 
 output_pdf_file = 'etiquetas.pdf'
 
@@ -198,10 +200,48 @@ url = 'https://docs.google.com/spreadsheets/d' \
       '/1nQFe_ZYNsUMopK6SQJWklHCHt96bSzwB-LTgry6J0WI' \
       '/export?gid=1318123784&format=csv'
 
-print("Requesting data from sheet...", end=" ")
+print("Requesting data from sheet...", end=" ", flush=True)
 csv_data = requests.get(url).content.decode('utf-8') \
            .replace('\r', '').split('\n')
 print("Done.")
+
+all_tombos = set()
+
+
+def get_tombo(raw, n):
+    ret = []
+
+    for t in raw.split(','):
+        if '-' in t:
+            start = re.search(r'\d', t).start()
+            dash = re.search('-', t).start()
+            prefix = t[:start]
+            try:
+                n1 = int(t[start:dash])
+                n2 = int(t[dash + 1:])
+            except ValueError:
+                print("Erro ao processar o numero de tombo: t")
+                print("Só devem haver numeros antes e depois do hífen")
+
+            for i in range(n1, n2 + 1):
+                ret.append(prefix + str(i))
+
+        else:
+            ret.append(t)
+
+    if len(ret) < n:
+        print("Tombo", raw + ": Ha menos numeros de tombo do que exemplares!")
+        ret += [ret[-1]] * (n - len(ret)) #complete n with the last tombo number
+    elif len(ret) > n:
+        print("Tombo", raw + ": Ha mais numeros de tombo do que exemplares!")
+
+    for t in ret:
+        if t in all_tombos:
+            print("Numero de tombo", t, "duplicado!")
+        else:
+            all_tombos.add(t)
+
+    return ret[:n]
 
 
 for entry in csv.DictReader(csv_data):
@@ -212,17 +252,20 @@ for entry in csv.DictReader(csv_data):
             n = int(entry[n_exemplares])
         except ValueError:
             n = 1
+
+        tombos = get_tombo(entry[tombo], n)
+
         for i in range(n):
             pdf.entrada(
-                    entry[tombo],
+                    tombos[i],
                     entry[autor],
-                    'Ex. ' + str(n),
+                    'Ex. ' + str(i + 1),
                     entry[loc],
                     entry[titulo].rstrip(' /-'),
                     treat_color(entry[cor]),
                     treat_section(entry[secao]),
                     )
     else:
-        print("ignorando entrada " +  entry[titulo] + " - " + entry[autor] + "...")
+        print("ignorando entrada vazia:" +  entry[titulo] + " - " + entry[autor] + "...")
 
 pdf.output(output_pdf_file)
