@@ -10,19 +10,26 @@ output_pdf_file = 'etiquetas.pdf'
 
 #### PDF definitions ####
 
-box_w = 65
-box_h = 25
+A4_width = 210
+A4_height = 297
 
-gap = 1.2
-margin_top = 9.5
+margin_top = 8
 margin_sides = 6.5
+margin_bottom = 8.5
+
+horizontal_gap = 2.5
+vertical_gap = 0
+
+n_boxes = 11
+box_w = 63.5
+box_h = (A4_height - margin_top - margin_bottom)/n_boxes
 
 title_font_size = 10
 info_font_size = 8
 
 COLORS = {
-        'pink': (255,20,147),
-        'vermelho': (255,0,0),
+        'pink': (255,0,190),
+        'vermelho': (255,40,40),
         'verde': (0,255,0),
         'azul esc.': (0,0,255),
         'azul claro': (173,216,230),
@@ -71,12 +78,12 @@ class PDF(FPDF):
             self.new_page()
             x, y = self.get_x(), self.get_y()
 
-        self.cell(box_w, box_h, ln = ln, border=1)
+        self.cell(box_w, box_h, ln = ln, border=0)
 
         if ln:
-            self.walk(0, gap)
+            self.walk(0, vertical_gap)
         else:
-            self.walk(gap, 0)
+            self.walk(horizontal_gap, 0)
 
         return x, y
 
