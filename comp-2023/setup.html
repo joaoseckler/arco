@@ -1,0 +1,127 @@
+<DOCTYPE html>
+  <html>
+    <head>
+      <title> jseckler </title>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="../style.css">
+      <style>
+        body {
+          max-width: 600px;
+        }
+        p > img {
+          width: 150%;
+          margin-left: -25%;
+          max-width: 95vw;
+        }
+        @media (max-width: 900px) {
+          p > img {
+            margin-left: calc(-1 * (95vw - 600px)/2);
+          }
+        }
+
+        @media (max-width: 600px) {
+          p > img {
+            margin-left: 2.5vw;
+          }
+        }
+      </style>
+      <link rel="icon" type="image/ico" href="../favicon.ico"></link>
+    </head>
+
+    <body>
+      <div class="logo-container">
+        <img src="../logo.jpg" class="logo-image" />
+      </div>
+      <h2>Instalando o Python</h2>
+      <h3>no Windows</h3>
+      <p>Para instalar o Python no seu sistema operacional Windows, você
+      precisa baixar o instalador. Acesse o site oficial
+      <a href="https://www.python.org/downloads/windows">neste link</a> e
+      procure o instalador de 64 bits, como abaixo</p>
+      <p><img src="img/2.png" /></p>
+
+      <p>Faça o download do instalador executável do Windows e clique
+      duas vezes nele para iniciar o assistente de instalação do python
+      como mostrado abaixo.</p>
+
+      <p><img src="img/3.png" /></p>
+      <p>O processo de instalação é bem simples.<br>
+      1. Marque a opção "Add Python to PATH"<br>
+      2. Clique em "Install Now"<br>
+      3. Se tudo correr bem, clique em "Close"</p>
+
+      <h3>no Mac e no Linux</h3>
+      <p>Muito provavelmente o Python já está instalado para você. Tudo
+      certo!</p>
+
+      <h2>Como instalar e configurar o Visual Studio Code (VSCode)</h2>
+
+      <p>Visual Studio Code é um editor de texto voltado para
+      programação.</p>
+
+      <h3>no Windows</h3>
+
+      <p>A instalação no Windows é relativamente simples, basta acessar o
+      site oficial do Visual Studio Code e fazer o Download da sua
+      última versão, clicando no botão "Download for Windows".</p>
+
+      <p>Em seguida, execute o instalador baixado e siga as instruções na
+      tela, não esqueça de marcar a opção "Add to Path" para adicionar o
+      Visual Studio Code nas variáveis de ambiente.</p>
+
+      <h3>no Mac</h3>
+      <p>A instalação no Mac é relativamente simples, basta acessar o
+      site oficial do Visual Studio Code e fazer o Download da sua
+      última versão, clicando no botão "Download for Mac".</p>
+
+      <p>Abra o instalador e copie o Visual Studio Code para a pasta
+      Applications do seu Mac e pronto.</p>
+
+      <h3>no Linux</h3>
+      <p><em>(Essas instruções servem para distribuições baseadas em
+        debian, como o Ubuntu e o Mint)</em></p>
+
+      <p>A instalação no Linux é relativamente simples, basta acessar o
+      site oficial do Visual Studio Code e fazer o Download da sua
+      última versão, clicando no botão "Download for Linux".</p>
+
+      <p>Como resultado do Download você terá um pacote .deb na pasta
+      Downloads. Abra um terminal, navegue até a mesma e execute o
+      seguinte comando:</p>
+
+      <p><code>sudo apt install ./ARQUIVO_BAIXADO.deb</code></p>
+
+      <p>Pronto, a instalação do Visual Studio Code está realizada e ele
+      já deve aparecer no menu de aplicativos para você.</p>
+
+      <h3>Instalação da extensão para Python do VSCode</h3>
+      <p>As extensões são como uma espécie <b>aplicativos complementares
+      instalados dentro do VSCode</b> que nos permite acesso a
+      funcionalidades extra.</p>
+      <p>Com o visual studio code aberto, pressione
+      <code>Ctrl+Shift+X</code> ou localize o ícone de extensões no menu
+      lateral à esquerda. Em seguida, pesquise "Python" e instale a
+      primeira opção</p>
+
+      <p><img src="img/1.png"></p>
+
+      <h3>Fontes</h3>
+      <ul>
+        <li>
+          <a href="https://balta.io/blog/visual-studio-code-instalacao-customizacao">Visual Studio Code - Instalação e Customização</a>
+        </li>
+        <li>
+          <a href="https://asimov.academy/blog/artigo/como-instalar-e-configurar-o-vscode">Como instalar e configurar o VSCode para Python</a>.
+        </li>
+        <li>
+          <a href="https://python.org.br/instalacao-windows/">Instalando o Python 3 no Windows</a>.
+        </li>
+      </ul>
+
+      <br><br>
+      <p class="back"><a href="index.html">π</a></p>
+      <br>
+      <p id="lastchange">
+      Última modificação: 08-03-2023
+      </p>
+    </body>
