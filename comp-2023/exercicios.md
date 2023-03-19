@@ -48,7 +48,7 @@ Comece executando as instruções de atribuição:
 >>> s3 = 'cod'
 ```
 
-Escreva expressões Python usando `s1`, `s2` e `s3` e os operadores `+` e `\*` a fim de avaliar para:
+Escreva expressões Python usando `s1`, `s2` e `s3` e os operadores `+` e `*` a fim de avaliar para:
 
 a. `'ant bat cod'`
 b. `'ant ant ant ant ant ant ant ant ant ant'`
@@ -110,6 +110,7 @@ e. `4 / 2 in [1, 2, 3]`
 ### Exercício LPP2.9
 
 Qual é o tipo do objeto ao qual essas expressões são avaliadas?
+
 a. `False + False`
 b. `2 * 3**2.0`
 c. `4 // 2 + 4 % 2`
@@ -149,6 +150,7 @@ acontece se você tentar usar isso no Python?
 ### Exercício AD1.2
 
 Inicialize o interpretador do Python e use-o como uma calculadora.
+
 1. Quantos segundos há em 42 minutos e 42 segundos?
 2. Quantas milhas há em 10 quilômetros? Dica: uma milha equivale a 1,61 quilômetro.
 3. Se você correr 10 quilômetros em 42 minutos e 42 segundos, qual é o seu passo
@@ -171,7 +173,7 @@ se você tentar fazer o mesmo no Python?
 ### Exercício AD2.2
 Pratique o uso do interpretador do Python como uma calculadora:
 
-1. O volume de uma esfera com raio r é . Qual é o volume de uma esfera com raio
+1. O volume de uma esfera com raio r é (4/3)πr³. Qual é o volume de uma esfera com raio
 5?
 2. Suponha que o preço de capa de um livro seja R$ 24,95, mas as livrarias recebem um
 desconto de 40%. O transporte custa R$ 3,00 para o primeiro exemplar e 75 centavos
@@ -444,6 +446,7 @@ script.
 
 Nota: Este exercício deve ser feito usando-se apenas as instruções e os outros
 recursos que aprendemos até agora.
+
 1. Escreva uma função que desenhe uma grade como a seguinte:
 
 ```
@@ -492,7 +495,7 @@ Escreva uma chamada de função que passe `bob` como um argumento para o square 
 chamado `n` e altere o corpo para que desenhe um polígono regular de `n` lados.
 (Dica: os ângulos exteriores de um polígono regular de `n` lados são 360/`n` graus.)
 4. Escreva uma função chamada `circle` que use o turtle, `t` e um raio `r` como parâmetros e desenhe um círculo aproximado ao chamar `polygon` com um comprimento e número de lados adequados. Teste a sua função com uma série de valores de `r`.
-(Dica: descubra a circunferência do círculo e certifique-se de que `length \* n =
+(Dica: descubra a circunferência do círculo e certifique-se de que `length * n =
 circumference`.)
 5. Faça uma versão mais geral do circle chamada `arc`, que receba um parâmetro
 adicional de `angle`, para determinar qual fração do círculo deve ser desenhada. `angle` está em unidades de graus, então quando `angle == 360`, o `arc` deve desenhar um círculo completo.
