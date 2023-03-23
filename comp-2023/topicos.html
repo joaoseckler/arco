@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> jseckler </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/ico" href="../favicon.ico"></link>
+    <style>
+        body {
+          max-width: 600px;
+        }
+    </style>
+  </head>
+
+  <body>
+    <div class="logo-container">
+      <img src="../logo.jpg" class="logo-image" />
+    </div>
+
+<h2 id="tópicos-vistos-em-aula">Tópicos vistos em aula</h2>
+<h3 id="discussão">Discussão</h3>
+<ul>
+<li>Computação sem computadores</li>
+<li>Computador como ferramenta</li>
+<li>O trabalho de um cientista da computação</li>
+<li>O que é um computador</li>
+<li>Características de uma linguagem de programação</li>
+</ul>
+<h3 id="expressões-e-instruções">Expressões e instruções</h3>
+<ul>
+<li><p><em>Expressões</em> são “frases” (sequências de operações e
+operandos) que têm associadas a si:</p>
+<ol type="1">
+<li>Um valor</li>
+<li>Um tipo</li>
+</ol>
+<p>Por exemplo, a expressão <code>2 / 2</code> tem valor
+<code>1.0</code> e tipo <code>float</code>.</p></li>
+<li><p>Uma <em>instrução</em> ou declaração é um outro tipo de “frase”
+que não tem um valor associado, mas simplesmente indica uma operação que
+o interpretador deve fazer. Até agora vimos dois tipos de intrução:</p>
+<ol type="1">
+<li>Atribuição (dar um valor a uma variável), por exemplo,
+<code>x = 4</code>. Repare que o lado direito do simbolo de
+<code>=</code> é sempre uma expressão, cujo valor é armazenado na
+variável.</li>
+<li>Importar uma biblioteca, por exemplo,<code>import math</code></li>
+</ol></li>
+</ul>
+<h3 id="tipos">Tipos</h3>
+<p>(também conhecidos como classes)</p>
+<ul>
+<li><code>int</code>: número inteiro</li>
+<li><code>float</code>: número real (“quebrado”)</li>
+<li><code>str</code>: string (cadeia de caracteres, texto)</li>
+<li><code>bool</code>: booleano (<code>True</code> ou
+<code>False</code>, sim ou não, verdadeiro ou falso)</li>
+</ul>
+<h3 id="erro">Erro</h3>
+<p>Erros sempre vão aparecer, e temos que saber lidar com eles. É
+importante aprender a ler mensagens de erro, por mais confusas que elas
+possam ser de vez em quando (a tendência é que vá ficando mais fácil com
+o tempo).</p>
+<p>Falamos de alguns tipos de erro: * Erro de sintaxe: escrevemos alguma
+coisa que não faz sentido para o Python * Erro semântico: o nosso
+programa executa normalmente, mas ele não faz o que a gente gostaria que
+ele fizesse (esse é o tipo mais perigoso) * Erro de “runtime”: alguma
+coisa dá errado durante a execução do programa.</p>
+<h3 id="operadores-aritméticos">Operadores aritméticos</h3>
+<ul>
+<li><code>+</code></li>
+<li><code>-</code></li>
+<li><code>*</code></li>
+<li><code>/</code> (divisão “real”)</li>
+<li><code>//</code> (divisão inteira)</li>
+<li><code>%</code> (módulo ou resto da divisão)</li>
+<li><code>**</code> (potenciação)</li>
+</ul>
+<p>Lembrando que alguns operadores têm precedência sobre outros, então
+às vezes precisamos usar parênteses para que as contas sejam feitas na
+ordem que escolhermos (diferente da matemática convencional, aqui só
+podemos usar o parênteses para esse propósito. O colchete
+(<code>[</code>) e as chaves (<code>{</code>) tem outras funções).</p>
+<h3 id="operadores-booleanos">Operadores booleanos</h3>
+<p>São aqueles operadores que nos dão um valor booleano. Por
+exemplo:</p>
+<pre><code>&gt;&gt;&gt; 10 &gt; 5
+True</code></pre>
+<ul>
+<li><code>&gt;</code></li>
+<li><code>&lt;</code></li>
+<li><code>==</code> (Não confundir com <code>=</code>, usado para
+atribuir valores a variáveis!)</li>
+<li><code>&gt;=</code></li>
+<li><code>&lt;=</code></li>
+</ul>
+<h3 id="operações-com-strings">Operações com strings</h3>
+<p>Aprendemos a:</p>
+<ul>
+<li>concatenar duas strings (<code>s1 + s2</code>)</li>
+<li>concatenar sucessivamente a mesma string (<code>s1 * 4</code>)</li>
+<li>Acessar os elementos de uma string pelo seu índice (o primeiro
+elemento da string <code>s</code> é o <code>s[0]</code>, o enésimo
+elemento de <code>s</code> é <code>s[n - 1]</code>)</li>
+</ul>
+
+    <br><br>
+    <p class="back"><a href="index.html">π</a></p>
+
+    <br>
+    <p id="lastchange">
+    Última modificação: 23-03-2023
+    </p>
+  </body>

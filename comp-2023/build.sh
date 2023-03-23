@@ -1,9 +1,21 @@
 #!/bin/bash
 
-pandoc exercicios.md -o tmp.html
+render() {
+  file="$1"
+  template="${2:-"templates/base.html"}"
 
-sed '/##exercicios##/q' templates/exercicios.html | head -n-1 > exercicios.html
-cat tmp.html >> exercicios.html
-sed -n '/##exercicios##/,$p' templates/exercicios.html | tail +1 >> exercicios.html
+  htmlfile="$1".html
+  mdfile="$1".md
 
-rm tmp.html
+  pandoc "$mdfile" -o tmp.html
+
+  sed '/##exercicios##/q' "$template" | head -n-1 > "$htmlfile"
+  cat tmp.html >> "$htmlfile"
+  sed -n '/##exercicios##/,$p' "$template" | tail +2 >> "$htmlfile"
+  sed -i 's/Última modificação: .*$/Última modificação: '"$(date +%d-%m-%Y)/" "$htmlfile"
+
+  rm tmp.html
+}
+
+render exercicios
+render topicos
