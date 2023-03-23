@@ -1,21 +1,29 @@
 #!/bin/bash
 
-render() {
-  file="$1"
-  template="${2:-"templates/base.html"}"
+name="$1"
+template="${2:-"templates/base.html"}"
 
-  htmlfile="$1".html
-  mdfile="$1".md
+htmlfile="$name".html
+mdfile="$name".md
 
-  pandoc "$mdfile" -o tmp.html
+pandoc "$mdfile" -o tmp.html
 
-  sed '/##exercicios##/q' "$template" | head -n-1 > "$htmlfile"
-  cat tmp.html >> "$htmlfile"
-  sed -n '/##exercicios##/,$p' "$template" | tail +2 >> "$htmlfile"
-  sed -i 's/Última modificação: .*$/Última modificação: '"$(date +%d-%m-%Y)/" "$htmlfile"
+sed '/##exercicios##/q' "$template" | head -n-1 > "$htmlfile"
+cat tmp.html >> "$htmlfile"
+sed -n '/##exercicios##/,$p' "$template" | tail +2 >> "$htmlfile"
+sed -i 's/Última modificação: .*$/Última modificação: '"$(date +%d-%m-%Y)/" "$htmlfile"
 
-  rm tmp.html
-}
+if [[ "$name" =~ / ]]; then
+  sed -i 's|##rel##|../|' "$htmlfile"
+else
+  sed -i 's|##rel##||' "$htmlfile"
+fi
 
-render exercicios
-render topicos
+if [[ "$name" =~ /index ]]; then
+  sed -i 's|##foot##|../|' "$htmlfile"
+else
+  sed -i 's|##foot##||' "$htmlfile"
+fi
+
+rm tmp.html
+

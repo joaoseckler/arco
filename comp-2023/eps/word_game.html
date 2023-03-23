@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> jseckler </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" type="image/ico" href="../../favicon.ico"></link>
+    <style>
+        body {
+          max-width: 600px;
+        }
+
+
+        p > img, figure > img {
+          width: 150%;
+          margin-left: -25%;
+          max-width: 95vw;
+        }
+
+        figure {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        figcaption {
+          display: none;
+        }
+
+        @media (max-width: 900px) {
+          p > img, figure > img {
+            margin-left: calc(-1 * (95vw - 600px)/2);
+          }
+        }
+
+        @media (max-width: 600px) {
+          p > img, figure > img {
+            margin-left: 2.5vw;
+          }
+        }
+      </style>
+  </head>
+
+  <body>
+    <div class="logo-container">
+      <img src="../../logo.jpg" class="logo-image" />
+    </div>
+
+<h2 id="word-game">Word game</h2>
+<p><em>Adapted from MIT’s <a
+href="https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/pages/syllabus/">open
+course</a> 6-0001 - Introduction to Computer Science and programming in
+python, as offered in 2016</em></p>
+<h3 id="introduction">Introduction</h3>
+<p>In this problem set, you’ll implement a version of the 6.0001 word
+game! Don’t be intimidated by the length of this problem set. It’s a lot
+of reading, but it is very doable.</p>
+<p>Let’s begin by describing the word game: This game is a lot like
+Scrabble or Words With Friends. Letters are dealt to players, who then
+construct one or more words using their letters. Each valid word earns
+the user points, based on the length of the word and the letters in that
+word. The rules of the game are as follows. Do not start coding yet – as
+in Pset 2, we will break this down into steps below!</p>
+<h3 id="dealing">Dealing</h3>
+<ul>
+<li>A player is dealt a hand of <code>HAND_SIZE</code> letters of the
+alphabet, chosen at random.</li>
+<li>This may include multiple instances of a particular letter.</li>
+<li>The player arranges the hand into as many words as they want out of
+the letters, but using each letter at most once.</li>
+<li>Some letters may remain unused, though the size of the hand when a
+word is played does affect its score.</li>
+</ul>
+<h3 id="scoring">Scoring</h3>
+<ul>
+<li>The score for the hand is the sum of the score for each word
+formed.</li>
+<li>The score for a word is the <strong>product</strong> of two
+components:
+<ul>
+<li>First component: the sum of the points for letters in the word.</li>
+<li>Second component: either
+<code>[7 * word_length - 3 \* (n - word_length)]</code> or 1, whichever
+value is greater, where:
+<ul>
+<li>word_length is the number of letters used in the word</li>
+<li>n is the number of letters available in the current hand</li>
+</ul></li>
+</ul></li>
+<li>Letters are scored as in Scrabble; A is worth 1, B is worth 3, C is
+worth 3, D is worth 2, E is worth 1, and so on. We have defined the
+dictionary <code>SCRABBLE_LETTER_VALUES</code> that maps each lowercase
+letter to its Scrabble letter value.</li>
+</ul>
+<h4 id="examples">Examples:</h4>
+<ul>
+<li>For example, if <code>n=6</code> and the hand includes 1
+<code>'w'</code>, 2 <code>'e'</code>s, and 1 <code>'d'</code> (as well
+as two other letters), playing the word <code>'weed'</code> would be
+worth 176 points: <code>(4+1+1+2) \* (7\*4 - 3\*(6-4)) = 176</code>. The
+first term is the sum of the values of each letter used; the second term
+is the special computation that rewards a player for playing a longer
+word, and penalizes them for any left over letters.</li>
+<li>As another example, if <code>n=7</code>, playing the word
+<code>'it'</code> would be worth 2 points: <code>(1+1) * (1) = 2</code>.
+The second component is 1 because <code>7\*2 - 3\*(7 - 2) = -1</code>,
+which is less than 1.</li>
+</ul>
+<h3 id="getting-started">Getting Started</h3>
+<ol type="1">
+<li>Download and save all files in the “Files” section at the end of
+this page. This includes the python file <code>ps3.py</code>, which
+should contain all of your code, as it provides a set of initial
+procedures and templates for new procedures. <code>ps3.zip</code> also
+includes a file for testing your code <code>test_ps3.py</code>, and a
+file of legitimate words <code>words.txt</code>. `Do not change or
+delete anything in the file unless specified.</li>
+<li>Run <code>ps3.py</code>, without making any modifications to it, in
+order to ensure that everything is set up correctly. The code we have
+given you loads a list of valid words from a file and then calls the
+<code>play_game</code> function. You will implement the functions it
+needs in order to work. If everything is okay, after a small delay, you
+should see the following printed out:</li>
+</ol>
+<pre><code>Loading word list from file...
+83667 words loaded.
+play_game not yet implemented.</code></pre>
+<p>If you see an <code>IOError</code> instead (e.g.,
+<code>No such file or directory</code>), make sure you have saved
+<code>words.txt</code> in the same directory as <code>ps3.py</code>!</p>
+<ol start="3" type="1">
+<li>The file <code>ps3.py</code> has a number of already-implemented
+functions you can use while writing up your solution. You can ignore the
+code between the following comments, though you should read and
+understand everything else.</li>
+</ol>
+<pre><code>    # -----------------------------------
+    # Helper code
+    # (you don’t need to understand this helper code)
+        .
+        .
+        .
+    # (end of helper code)
+    # -----------------------------------</code></pre>
+<ol start="4" type="1">
+<li><p>This problem set is structured so that you will write a number of
+modular functions and then glue them together to form the complete game.
+Instead of waiting until the entire game is ready, you should test each
+function you write, individually, before moving on. This approach is
+known as unit testing, and it will help you debug your code.</p></li>
+<li><p>We have included some hints about how you might want to implement
+some of the required functions in the included files. You don’t need to
+remove them in your final submission.</p></li>
+</ol>
+<p>We have provided several test functions to get you started. As you
+make progress on the problem set, run <code>test_ps3.py</code> to check
+your work so far.</p>
+<p>If your code passes the unit tests you will see a SUCCESS message;
+otherwise you will see a FAILURE message. <strong>These tests aren’t
+exhaustive. You may want to test your code in other ways too</strong>
+(for example, with different test values).</p>
+<p>If you run <code>test_ps3.py</code> using the initially provided
+<code>ps3.py</code> skeleton, you should see that all the tests
+fail.</p>
+<p>These are the provided test functions:</p>
+<p><code>test_get_word_score</code> - Test the
+<code>get_word_score</code> implementation.
+<code>test_update_hand</code> - Test the <code>update_hand</code>
+implementation. <code>test_is_valid_word</code> - Test the
+<code>is_valid_word</code> implementation. <code>test_wildcard</code> -
+Test the modifications made to support wildcards. (more about those
+later on)</p>
+<h2 id="word-scores">1. Word scores</h2>
+<p>The first step is to implement a function that calculates the score
+for a single word. Fill in the code for <code>get_word_score</code> in
+<code>ps3.py</code> according to the function specifications.</p>
+<p>As a reminder, here are the rules for scoring a word: * The score for
+a word is the product of two components: * First component: the sum of
+the points for letters in the word. * Second component: either
+<code>[7 \* word_length - 3 \* (n-word_length)]</code> or 1, whichever
+value is greater, where: * <code>word_length</code> is the number of
+letters used in the word * n is the number of letters available in the
+current hand</p>
+<p>You should use the <code>SCRABBLE_LETTER_VALUES</code> dictionary
+defined at the top of <code>ps3.py</code>. Do not assume that there are
+always 7 letters in a hand! The parameter <code>n</code> is the total
+number of letters in the hand when the word was entered.</p>
+<p>Finally, you may find the <code>str.lower</code> function
+helpful:</p>
+<pre><code>s = “My string”
+print(s.lower())
+&gt;&gt;&gt;&gt; “my string”</code></pre>
+<p>If you don’t know what this does you could try typing
+<code>help(str.lower)</code> in your Spyder shell to see the
+documentation for the functions.</p>
+<p><strong>Testing:</strong> If this function is implemented correctly,
+and you run <code>test_ps3.py</code>, the
+<code>test_get_word_score()</code> tests will pass. You should also test
+your implementation of <code>get_word_score</code> yourself, using some
+reasonable English words. Note that the wildcard tests will crash due to
+a <code>KeyError</code>. This is fine for now - you will fix this in
+Problem 4.</p>
+<h2 id="dealing-with-hands">2. Dealing with hands</h2>
+<p><strong>Please read this section entirely before you begin coding
+your solution</strong>. Most of the functions described below have been
+implemented for you already.</p>
+<h3 id="representing-hands">Representing hands</h3>
+<p>A hand is the set of letters held by a player during the game. The
+player is initially dealt a set of random letters. For example, the
+player could start out with the following hand:
+<code>a, q, l, m, u, i, l</code>. In our program, a hand will be
+represented as a dictionary: the keys are (lowercase) letters and the
+values are the number of times the particular letter is repeated in that
+hand. For example, the above hand would be represented as:</p>
+<pre><code>hand = {&#39;a&#39;:1, &#39;q&#39;:1, &#39;l&#39;:2, &#39;m&#39;:1, &#39;u&#39;:1, &#39;i&#39;:1}</code></pre>
+<p>Notice how the repeated letter <code>'l'</code> is represented. With
+a dictionary representation, the usual way to access a value is
+<code>hand['a']</code> ,where <code>'a'</code> is the key we want to
+find. However, this only works if the key is in the dictionary;
+otherwise, we get a <code>KeyError</code>. To avoid this, we can instead
+use the function call <code>hand.get('a',0)</code>. This is the “safe”
+way to access a value if we are not sure the key is in the dictionary.
+<code>d.get(key,default)</code> returns the value for <code>key</code>
+if <code>key</code> is in the dictionary <code>d</code>, else it returns
+<code>default</code>. If <code>default</code> is not given, it returns
+<code>None</code>, so that this method never raises a
+<code>KeyError</code>.</p>
+<h3 id="converting-words-into-dictionary-representation">Converting
+words into dictionary representation</h3>
+<p>One useful function we’ve defined for you is
+<code>get_frequency_dict</code>, defined near the top of
+<code>ps3.py</code>. When given a string of letters as an input, it
+returns a dictionary where the keys are letters and the values are the
+number of times that letter is represented in the input string. For
+example:</p>
+<pre><code>&gt;&gt; get_frequency_dict(&quot;hello&quot;)
+{&#39;h&#39;: 1, &#39;e&#39;: 1, &#39;l&#39;: 2, &#39;o&#39;: 1}</code></pre>
+<p>As you can see, this is the same kind of dictionary we use to
+represent hands.</p>
+<h3 id="displaying-a-hand">Displaying a hand</h3>
+<p>Given a hand represented as a dictionary, we want to display it in a
+user-friendly way. We have provided the implementation for this in the
+<code>display_hand</code> function. Take a few minutes right now to read
+through this function carefully and understand what it does and how it
+works.</p>
+<h3 id="generating-a-random-hand">Generating a random hand</h3>
+<p>The hand a player is dealt is a set of letters chosen at random. We
+provide you with a function that generates a random hand,
+<code>deal_hand</code>. The function takes as input a positive integer
+<code>n</code>, and returns a new dictionary representing a hand of
+<code>n</code> lowercase letters. Again, take a few minutes to read
+through this function carefully and understand what it does and how it
+works.</p>
+<h3 id="removing-letters-from-a-hand-you-implement-this">Removing
+letters from a hand (you implement this!)</h3>
+<p>The player starts with a full hand of <code>n</code> letters. As the
+player spells out words, letters from the set are used up. For example,
+the player could start with the following hand:
+<code>a, q, l, m, u, i, l</code>. The player could choose to play the
+word <code>quail</code>. This would leave the following letters in the
+player’s hand: <code>l, m</code>. You will now write a function that
+takes a hand and a word as inputs, uses letters from that hand to spell
+the word, and returns a <strong>new</strong> hand containing only the
+remaining letters. Your function should <strong>not</strong> modify the
+input hand. For example:</p>
+<pre><code>&gt;&gt; hand = {&#39;a&#39;:1, &#39;q&#39;:1, &#39;l&#39;:2, &#39;m&#39;:1, &#39;u&#39;:1, &#39;i&#39;:1}
+&gt;&gt; display_hand(hand)
+a q l l m u i
+&gt;&gt; new_hand = update_hand(hand, &#39;quail&#39;)
+&gt;&gt; new_hand
+{&#39;l&#39;: 1, &#39;m&#39;: 1}
+&gt;&gt; display_hand(new_hand)
+l m
+&gt;&gt; display_hand(hand)
+a q l l m u i</code></pre>
+<p>(<strong>NOTE:</strong> Alternatively, in the above example, after
+the call to <code>update_hand</code> the value of <code>new_hand</code>
+could be the dictionary
+<code>{'a':0, 'q':0, 'l':1, 'm':1, 'u':0, 'i':0}. The exact value depends on your implementation; but the output of</code>display_hand()`
+should be the same in either case.)</p>
+<p><strong>IMPORTANT:</strong> If the player guesses a word that is
+invalid, either because it is not a real word or because they used
+letters that they don’t actually have in their hand, they still lose the
+letters from their hand that they did guess as a penalty. Make sure that
+your implementation accounts for this! Do not assume that the word you
+are given only uses letters that actually exist in the hand. For
+example:</p>
+<pre><code>&gt;&gt; hand = {&#39;j&#39;:2, &#39;o&#39;:1, &#39;l&#39;:1, &#39;w&#39;:1, &#39;n&#39;:2}
+&gt;&gt; display_hand(hand)
+j j o l w n n
+&gt;&gt; hand = update_hand(hand, &#39;jolly&#39;)
+&gt;&gt; hand
+{&#39;j&#39;:1, w&#39;:1, &#39;n&#39;:2}
+&gt;&gt; display_hand(hand)
+j w n n</code></pre>
+<p>Note that one ‘j’, one ‘o’, and one ‘l’ (despite that facts that the
+player tried to use two, because only one existed in the hand) were used
+up. The ‘y’ guess has no effect on the hand, because ‘y’ was not in the
+hand to begin with. Also, the same note from above about alternate
+representations of the hand applies here.</p>
+<p>Implement the <code>update_hand</code> function according to the
+specifications in the skeleton code.</p>
+<p><strong>HINT:</strong> You may wish to review the documentation for
+the “<code>.copy</code>” method of Python dictionaries.</p>
+<p><strong>Testing:</strong> Make sure the <code>test_update_hand</code>
+tests pass. You may also want to test your implementation of
+<code>update_hand</code> with some reasonable inputs.</p>
+<h2 id="valid-words">3. Valid words</h2>
+<p>At this point, we have not written any code to verify that a word
+given by a player obeys the rules of the game. A valid word is in the
+word list (we ignore the case of words here) <strong>and</strong> it is
+composed entirely of letters from the current hand.</p>
+<p>Implement the <code>is_valid_word</code> function according to its
+specifications.</p>
+<p><strong>Testing:</strong> Make sure the
+<code>test_is_valid_word</code> tests pass. You should also test your
+implementation with some reasonable inputs. In particular, you may want
+to test your implementation by calling it multiple times on the same
+hand - what should the correct behavior be?</p>
+<h2 id="wildcards">4. Wildcards</h2>
+<p>We want to allow hands to contain wildcard letters, which will be
+denoted by an asterisk (*). Wildcards can only replace vowels. Each hand
+dealt should initially contain exactly one wildcard as one of its
+letters. The player <strong>does not</strong> receive any points for
+using the wildcard (unlike all the other letters), though it
+<strong>does</strong> count as a used or unused letter when scoring.</p>
+<p>During the game, a player wishing to use a wildcard should enter “*”
+(without quotes) instead of the intended letter. The word-validation
+code should not make any assumptions about what the intended vowel
+should be, but should verify that at least one valid word can be made
+with the wildcard as a vowel in the desired position.</p>
+<p>The examples below show how wildcards should behave in the context of
+playing a hand, which you will implement in Problem 5 below. Don’t worry
+about that part yet - just pay attention to how the wildcard is
+handled.</p>
+<h4 id="example-1-a-valid-word-made-without-the-wildcard">Example #1: A
+valid word made without the wildcard</h4>
+<pre><code>Current Hand: c o w s * z
+Enter word, or &quot;!!&quot; to indicate that you are finished: cows
+&quot;cows&quot; earned 198 points. Total: 198 points
+Current Hand: * z
+Enter word, or &quot;!!&quot; to indicate that you are finished: !!
+Total score: 198 points</code></pre>
+<h4 id="example-2-a-valid-word-made-using-the-wildcard">Example #2: A
+valid word made using the wildcard</h4>
+<pre><code>Current Hand: c o w s * z
+Enter word, or &quot;!!&quot; to indicate that you are finished: c*ws
+&quot;c*ws&quot; earned 176 points. Total: 176 points
+Current Hand: o z
+Enter word, or &quot;!!&quot; to indicate that you are finished: !!
+T6otal score: 176 points</code></pre>
+<h4 id="example-3-an-invalid-word-with-a-wildcard">Example #3: An
+invalid word with a wildcard</h4>
+<pre><code>Current Hand: c o w s * z
+Enter word, or &quot;!!&quot; to indicate that you are finished: c*wz
+That is not a valid word. Please choose another word.
+Current Hand: o s
+Enter word, or &quot;!!&quot; to indicate that you are finished: !!
+Total score: 0 points</code></pre>
+<h4 id="example-4-another-invalid-word-with-a-wildcard">Example #4:
+Another invalid word with a wildcard</h4>
+<pre><code>Current Hand: c o w s * z
+Enter word, or &quot;!!&quot; to indicate that you are finished: *ows
+That is not a valid word. Please choose another word.
+Current Hand: c z
+Enter word, or &quot;!!&quot; to indicate that you are finished: !!
+Total score: 0 points</code></pre>
+<p>Modify the <code>deal_hand</code> function to support always giving
+one wildcard in each hand. Note that <code>deal_hand</code> currently
+ensures that one third of the letters are vowels and the rest are
+consonants. Leave the consonant count intact, and replace one of the
+vowel slots with the wildcard. You will also need to modify one or more
+of the constants defined at the top of the file to account for
+wildcards.</p>
+<p>Then modify the <code>is_valid_word</code> function to support
+wildcards. <strong>Hint:</strong> Check to see what possible words can
+be formed by replacing the wildcard with other vowels. You may want to
+review the documentation for string module’s <code>find()</code>
+function and make note of its behavior when a character is not found.
+The constant <code>VOWELS</code> defined for you at the top of the file
+may be helpful as well.</p>
+<p><strong>Testing:</strong> Make sure the <code>test_wildcard</code>
+tests pass. You may also want to test your implementation with some
+reasonable inputs.</p>
+<h2 id="playing-a-hand">5. Playing a hand</h2>
+<p>We are now ready to begin writing the code that interacts with the
+player.</p>
+<p>Implement the <code>play_hand</code> function. This function allows
+the user to play out a single hand. You’ll first need to implement the
+helper function <code>calculate_handlen</code>, which can be done in
+under five lines of code.</p>
+<p>To end the hand early, the player <strong>must</strong> type
+“<code>!!</code>” (two exclamation points).</p>
+<p>Note that after the line <code># BEGIN PSEUDOCODE</code> there is a
+bunch of, well, pseudocode! This is to help guide you in writing your
+function. Check out the “<a
+href="https://stellar.mit.edu/S/course/6/fa14/6.0001/courseMaterial/topics/topic1/resource/WhyPseudocode/WhyPseudocode.pdf">Why
+Pseudocode?</a>” resource to learn more about the What and Why of
+Pseudocode before you start this problem.</p>
+<p><strong>Testing:</strong> Try out your implementation as if you were
+playing the game: run your program and call the <code>play_hand</code>
+function from your shell with a hand and the word_list.</p>
+<p><strong>Note:</strong> Your output <code>should</code> match the
+examples below. You should not print extraneous “<code>None</code>”
+messages.</p>
+<h4 id="example-1">Example #1</h4>
+<p>Current Hand: a j e f * r x Enter word, or “!!” to indicate that you
+are finished: jar “jar” earned 90 points. Total: 90 points Current Hand:
+* f x e Enter word, or “!!” to indicate that you are finished: f*x “f*x”
+earned 216 points. Total: 306 points Current Hand: e Enter word, or “!!”
+to indicate that you are finished: !! Total score: 306 points</p>
+<h4 id="example-2">Example #2</h4>
+<pre><code>Current Hand: a c f i * t x
+Enter word, or &quot;!!&quot; to indicate that you are finished: fix
+&quot;fix&quot; earned 117 points. Total: 117 points
+Current Hand: a c t *
+Enter word, or &quot;!!&quot; to indicate that you are finished: ac
+That is not a valid word. Please choose another word.
+Current Hand: t *
+Enter word, or &quot;!!&quot; to indicate that you are finished: *t
+&quot;*t&quot; earned 14 points. Total: 131 points
+Ran out of letters. Total score: 131 points</code></pre>
+<h2 id="playing-a-game">6. Playing a game</h2>
+<p>A game consists of playing multiple hands. We need to implement two
+final functions to complete our wordgame.</p>
+<p>Implement the <code>substitute_hand</code> and <code>play_game</code>
+functions according to their specifications. For the game, you should
+use the <code>HAND_SIZE</code> constant to determine the number of
+letters in a hand.</p>
+<p>Do <strong>not</strong> assume that there will always be 7 letters in
+a hand! Our goal is to keep the code modular - if you want to try
+playing your word game with 10 letters or 4 letters you will be able to
+do it by simply changing the value of <code>HAND_SIZE</code>!</p>
+<p>When implementing substitution, you might want to check the methods
+associated with dictionaries, such as <code>.keys</code>, or review the
+<code>del</code> keyword. You may also want to look at the code for
+<code>deal_hand</code> to see how <code>random.choice</code> can be used
+to select an element at random from a set of elements (such as a
+string).</p>
+<p>Note that we are not providing you with pseudocode for this problem.
+However, as you are deciding how to implement these functions, you may
+want to write your own as a guideline. <strong>Testing:</strong> Try out
+this implementation as if you were playing the game. Try out different
+values for <code>HAND_SIZE</code> with your program, and be sure that
+you can play the word game with different hand sizes by modifying only
+the variable HAND_SIZE.</p>
+<h4 id="example">Example</h4>
+<pre><code>Enter total number of hands: 2
+Current hand: a c i * p r t
+Would you like to substitute a letter? no
+Current hand: a c i * p r t
+Please enter a word or &#39;!!&#39; to indicate you are done: part
+&quot;part&quot; earned 114 points. Total: 114 points
+Current hand: c i *
+Please enter a word or &#39;!!&#39; to indicate you are done: ic*
+&quot;ic*&quot; earned 84 points. Total: 198 points
+Ran out of letters
+Total score for this hand: 198
+----------
+Would you like to replay the hand? no
+Current hand: d d * l o u t
+Would you like to substitute a letter? yes
+Which letter would you like to replace: l
+Current hand: d d * a o u t
+Please enter a word or &#39;!!&#39; to indicate you are done: out
+&quot;out&quot; earned 27 points. Total: 27 points
+Current hand: d d * a
+Please enter a word or &#39;!!&#39; to indicate you are done: !!
+Total score for this hand: 27
+----------
+Would you like to replay the hand? yes
+Current hand: d d * a o u t
+Please enter a word or &#39;!!&#39; to indicate you are done: d*d
+&quot;d*d&quot; earned 36 points. Total: 36 points
+Current hand: a o u t
+Please enter a word or &#39;!!&#39; to indicate you are done: out
+9&quot;out&quot; earned 54 points. Total: 90 points
+Current hand: a
+Please enter a word or &#39;!!&#39; to indicate you are done: !!
+Total score for this hand: 90
+----------
+Total score over all hands: 288</code></pre>
+<h3 id="files">Files</h3>
+<ul>
+<li><a href="test_ps3.py">test_ps3.py</a></li>
+<li><a href="ps3.py">ps3.py</a></li>
+<li><a href="words.txt">words.txt</a></li>
+</ul>
+
+    <br><br>
+    <p class="back"><a href="index.html">π</a></p>
+
+    <br>
+    <p id="lastchange">
+    Última modificação: 23-03-2023
+    </p>
+  </body>

@@ -2045,7 +2045,9 @@ Porque `'c'` é a “segunda” letra do alfabeto. Mas tenha cuidado: os código
 
 Piadas potencialmente ofensivas na internet às vezes são codificadas em ROT13, que é uma cifra de César com rotação 13. Se não se ofender facilmente, encontre e decifre algumas delas.
 
-### Exercício 154 (LP4.27) Escreva uma função `fcopy()` que aceite como entrada dois nomes de arquivo (como
+### Exercício 154 (LP4.27)
+
+Escreva uma função `fcopy()` que aceite como entrada dois nomes de arquivo (como
 strings) e copie o conteúdo do primeiro arquivo para o segundo.
 
 Arquivo: [crypto.txt](files/crypto.txt)
@@ -2057,7 +2059,9 @@ Arquivo: [crypto.txt](files/crypto.txt)
 Há uma linha em branco acima desta linha.\n'
 ```
 
-### Exercício 155 (LP4.28) Implemente a função `links()` que aceita como entrada o nome de um arquivo HTML
+### Exercício 155 (LP4.28)
+
+Implemente a função `links()` que aceita como entrada o nome de um arquivo HTML
 (como uma string) e retorna o número de hyperlinks nesse arquivo. Para fazer isso, você assumirá
 que cada hyperlink aparece em uma tag de âncora. Você também precisa saber que cada tag de
 âncora termina com a substring</a>.

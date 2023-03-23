@@ -609,4 +609,4 @@ This completes the task!
 ### Files
 
 * [hangman.py](hangman.py)
-* [words.txt](wordst.txt)
+* [words.txt](words.txt)

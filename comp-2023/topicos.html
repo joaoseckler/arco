@@ -9,7 +9,35 @@
         body {
           max-width: 600px;
         }
-    </style>
+
+
+        p > img, figure > img {
+          width: 150%;
+          margin-left: -25%;
+          max-width: 95vw;
+        }
+
+        figure {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        figcaption {
+          display: none;
+        }
+
+        @media (max-width: 900px) {
+          p > img, figure > img {
+            margin-left: calc(-1 * (95vw - 600px)/2);
+          }
+        }
+
+        @media (max-width: 600px) {
+          p > img, figure > img {
+            margin-left: 2.5vw;
+          }
+        }
+      </style>
   </head>
 
   <body>
@@ -44,7 +72,7 @@ o interpretador deve fazer. Até agora vimos dois tipos de intrução:</p>
 <code>x = 4</code>. Repare que o lado direito do simbolo de
 <code>=</code> é sempre uma expressão, cujo valor é armazenado na
 variável.</li>
-<li>Importar uma biblioteca, por exemplo,<code>import math</code></li>
+<li>Importar uma biblioteca, por exemplo, <code>import math</code></li>
 </ol></li>
 </ul>
 <h3 id="tipos">Tipos</h3>
@@ -56,6 +84,16 @@ variável.</li>
 <li><code>bool</code>: booleano (<code>True</code> ou
 <code>False</code>, sim ou não, verdadeiro ou falso)</li>
 </ul>
+<p>Veja abaixo também a função <code>type</code>, que nos diz qual é o
+tipo de uma expressão. Vimos também que podemos converter de um tipo
+para outro usando o nome do tipo como se fosse uma função:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">int</span>(<span class="st">&quot;34&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">34</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">type</span>(<span class="st">&quot;34&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;str&#39;</span><span class="op">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">type</span>(<span class="bu">int</span>(<span class="st">&quot;34&quot;</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;int&#39;</span><span class="op">&gt;</span></span></code></pre></div>
 <h3 id="erro">Erro</h3>
 <p>Erros sempre vão aparecer, e temos que saber lidar com eles. É
 importante aprender a ler mensagens de erro, por mais confusas que elas
@@ -81,6 +119,34 @@ coisa dá errado durante a execução do programa.</p>
 ordem que escolhermos (diferente da matemática convencional, aqui só
 podemos usar o parênteses para esse propósito. O colchete
 (<code>[</code>) e as chaves (<code>{</code>) tem outras funções).</p>
+<h3 id="funções-embutidas">Funções embutidas</h3>
+<ul>
+<li><p><code>len</code>: devolve o comprimento de uma string (ou de
+outros tipos que se apliquem).</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">len</span>(<span class="st">&quot;Olá, mundo!&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span></span></code></pre></div></li>
+<li><p><code>type</code>: Nos diz qual é o tipo da expressão.
+Exemplo</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">type</span>(<span class="dv">34</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;int&#39;</span><span class="op">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">type</span>(<span class="fl">3.3</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;float&#39;</span><span class="op">&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">type</span>(<span class="st">&quot;Olá!&quot;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;str&#39;</span><span class="op">&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">type</span>(<span class="dv">4</span> <span class="op">==</span> <span class="dv">4</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;bool&#39;</span><span class="op">&gt;</span></span></code></pre></div></li>
+<li><p><code>min</code> e <code>max</code>: Nos devolve o menor e o
+maior elemento de um conjunto de valores, respectivamente.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">min</span>(<span class="dv">18</span>, <span class="op">-</span><span class="dv">10</span>, <span class="dv">5</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="dv">10</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">min</span>(<span class="st">&quot;Alice&quot;</span>, <span class="st">&quot;Bruno&quot;</span>, <span class="st">&quot;Carla&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;Alice&#39;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">max</span>(<span class="fl">3.88</span>, <span class="fl">3.5</span>, <span class="fl">4.2</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fl">4.2</span></span></code></pre></div></li>
+</ul>
 <h3 id="operadores-booleanos">Operadores booleanos</h3>
 <p>São aqueles operadores que nos dão um valor booleano. Por
 exemplo:</p>
@@ -92,7 +158,12 @@ True</code></pre>
 <li><code>==</code> (Não confundir com <code>=</code>, usado para
 atribuir valores a variáveis!)</li>
 <li><code>&gt;=</code></li>
-<li><code>&lt;=</code></li>
+<li><code>&lt;=</code> <!--
+* `and`
+* `or`
+* `not`
+* `in`
+* `is`--></li>
 </ul>
 <h3 id="operações-com-strings">Operações com strings</h3>
 <p>Aprendemos a:</p>

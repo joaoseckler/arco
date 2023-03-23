@@ -9,7 +9,35 @@
         body {
           max-width: 600px;
         }
-    </style>
+
+
+        p > img, figure > img {
+          width: 150%;
+          margin-left: -25%;
+          max-width: 95vw;
+        }
+
+        figure {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        figcaption {
+          display: none;
+        }
+
+        @media (max-width: 900px) {
+          p > img, figure > img {
+            margin-left: calc(-1 * (95vw - 600px)/2);
+          }
+        }
+
+        @media (max-width: 600px) {
+          p > img, figure > img {
+            margin-left: 2.5vw;
+          }
+        }
+      </style>
   </head>
 
   <body>
@@ -1866,26 +1894,23 @@ cuidado: os códigos numéricos de letras maiúsculas são diferentes.</p>
 <p>Piadas potencialmente ofensivas na internet às vezes são codificadas
 em ROT13, que é uma cifra de César com rotação 13. Se não se ofender
 facilmente, encontre e decifre algumas delas.</p>
-<h3
-id="exercício-154-lp4.27-escreva-uma-função-fcopy-que-aceite-como-entrada-dois-nomes-de-arquivo-como">Exercício
-154 (LP4.27) Escreva uma função <code>fcopy()</code> que aceite como
-entrada dois nomes de arquivo (como</h3>
-<p>strings) e copie o conteúdo do primeiro arquivo para o segundo.</p>
+<h3 id="exercício-154-lp4.27">Exercício 154 (LP4.27)</h3>
+<p>Escreva uma função <code>fcopy()</code> que aceite como entrada dois
+nomes de arquivo (como strings) e copie o conteúdo do primeiro arquivo
+para o segundo.</p>
 <p>Arquivo: <a href="files/crypto.txt">crypto.txt</a></p>
 <pre><code>&gt;&gt;&gt; fcopy(&#39;exemplo.txt&#39;,&#39;saída.txt&#39;)
 &gt;&gt;&gt; open(&#39;saída.txt&#39;).read()
 &#39;As 3 linhas desse arquivo terminam com o caractere de nova linha.\n\n
 Há uma linha em branco acima desta linha.\n&#39;</code></pre>
-<h3
-id="exercício-155-lp4.28-implemente-a-função-links-que-aceita-como-entrada-o-nome-de-um-arquivo-html">Exercício
-155 (LP4.28) Implemente a função <code>links()</code> que aceita como
-entrada o nome de um arquivo HTML</h3>
-<p>(como uma string) e retorna o número de hyperlinks nesse arquivo.
-Para fazer isso, você assumirá que cada hyperlink aparece em uma tag de
-âncora. Você também precisa saber que cada tag de âncora termina com a
-substring</a>. Teste seu código no arquivo HTML
-<code>twolinks.html</code> ou em qualquer arquivo HTML baixado da Web
-para a pasta na qual seu programa se encontra.</p>
+<h3 id="exercício-155-lp4.28">Exercício 155 (LP4.28)</h3>
+<p>Implemente a função <code>links()</code> que aceita como entrada o
+nome de um arquivo HTML (como uma string) e retorna o número de
+hyperlinks nesse arquivo. Para fazer isso, você assumirá que cada
+hyperlink aparece em uma tag de âncora. Você também precisa saber que
+cada tag de âncora termina com a substring</a>. Teste seu código no
+arquivo HTML <code>twolinks.html</code> ou em qualquer arquivo HTML
+baixado da Web para a pasta na qual seu programa se encontra.</p>
 <p>Arquivo: <a href="files/links.html">links.html</a></p>
 <pre><code>&gt;&gt;&gt; links(&#39;twolinks.html&#39;)
 2</code></pre>

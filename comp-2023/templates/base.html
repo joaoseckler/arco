@@ -3,24 +3,52 @@
   <head>
     <title> jseckler </title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="icon" type="image/ico" href="../favicon.ico"></link>
+    <link rel="stylesheet" href="../##rel##style.css">
+    <link rel="icon" type="image/ico" href="../##rel##favicon.ico"></link>
     <style>
         body {
           max-width: 600px;
         }
-    </style>
+
+
+        p > img, figure > img {
+          width: 150%;
+          margin-left: -25%;
+          max-width: 95vw;
+        }
+
+        figure {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        figcaption {
+          display: none;
+        }
+
+        @media (max-width: 900px) {
+          p > img, figure > img {
+            margin-left: calc(-1 * (95vw - 600px)/2);
+          }
+        }
+
+        @media (max-width: 600px) {
+          p > img, figure > img {
+            margin-left: 2.5vw;
+          }
+        }
+      </style>
   </head>
 
   <body>
     <div class="logo-container">
-      <img src="../logo.jpg" class="logo-image" />
+      <img src="../##rel##logo.jpg" class="logo-image" />
     </div>
 
     ##exercicios##
 
     <br><br>
-    <p class="back"><a href="index.html">π</a></p>
+    <p class="back"><a href="##foot##index.html">π</a></p>
 
     <br>
     <p id="lastchange">

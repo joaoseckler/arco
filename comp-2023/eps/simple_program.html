@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> jseckler </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" type="image/ico" href="../../favicon.ico"></link>
+    <style>
+        body {
+          max-width: 600px;
+        }
+
+
+        p > img, figure > img {
+          width: 150%;
+          margin-left: -25%;
+          max-width: 95vw;
+        }
+
+        figure {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        figcaption {
+          display: none;
+        }
+
+        @media (max-width: 900px) {
+          p > img, figure > img {
+            margin-left: calc(-1 * (95vw - 600px)/2);
+          }
+        }
+
+        @media (max-width: 600px) {
+          p > img, figure > img {
+            margin-left: 2.5vw;
+          }
+        }
+      </style>
+  </head>
+
+  <body>
+    <div class="logo-container">
+      <img src="../../logo.jpg" class="logo-image" />
+    </div>
+
+<h2 id="a-very-simple-program">A Very Simple Program</h2>
+<p><em>Adapted from MIT’s <a
+href="https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/pages/syllabus/">open
+course</a> 6-0001 - Introduction to Computer Science and programming in
+python, as offered in 2016</em></p>
+<h3 id="raising-a-number-to-a-power-and-taking-a-logarithm">Raising a
+number to a power and taking a logarithm</h3>
+<p>The goal of this programming exercise is to make sure your python and
+numpy installations are correct, to get you more comfortable with using
+Spyder, and to begin using simple elements of Python. Standard elements
+of a program include the ability to print out results (using the print
+operation), the ability to read input from a user at the console (for
+example using the input function), and the ability to store values in a
+variable, so that the program can access that value as needed.</p>
+<h3 id="assignment">Assignment:</h3>
+<p>Write a program that does the following in order:</p>
+<ol type="1">
+<li>Asks the user to enter a number “x”</li>
+<li>Asks the user to enter a number “y”</li>
+<li>Prints out number “x”, raised to the power “y”.</li>
+<li>Prints out the log (base 2) of “x”.</li>
+</ol>
+<p>Use Spyder to create your program, and save your code in a file named
+‘ps0.py’.</p>
+<p>An example of an interaction with your program is shown below. The
+words printed in blue are ones the computer should print, based on your
+commands, while the words in black are an example of a user’s input. The
+colors are simply here to help you distinguish the two components.</p>
+<pre><code>Enter number x: 2
+Enter number y: 3
+x**y = 8
+log(x) = 1</code></pre>
+<p>Hints:</p>
+<ul>
+<li>To see how to use the print command, you may find it convenient to
+look at the input and output of the Python Wikibook. This will show you
+how to use print statements to print out values of variables.</li>
+<li>To see how to read input from a user’s console into the Python
+environment, you may find it convenient to look at the same section (see
+for example the input() function)</li>
+<li>Reference the basic math section of the Python Wikibook to read more
+about using basic mathematical operators in Python</li>
+<li>To take the logarithm of a variable, import either of the numpy or
+pylab packages. You can then call either numpy.log2 or pylab.log2 to
+calculate the logarithm. See the Getting Started document on importing
+packages and the many Numpy examples online for more info. Googling the
+log2 function may take you here, which has some helpful info.</li>
+<li>Remember that if you want to hold onto a value, you need to store it
+in a variable (i.e., give it a name to which you can refer when you want
+that value). You may find it convenient to look at the variables and
+strings section of the Python Wikibook. (As you read through, remember
+that in Python 3.x you should be using input() not raw_input()). Take a
+look at the “Combining Numbers and Strings” sub-section, because you
+will be working with numbers and strings in this problem and will have
+to convert between the two using the str() and int() functions.</li>
+</ul>
+
+    <br><br>
+    <p class="back"><a href="index.html">π</a></p>
+
+    <br>
+    <p id="lastchange">
+    Última modificação: 23-03-2023
+    </p>
+  </body>

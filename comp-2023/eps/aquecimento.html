@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> jseckler </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" type="image/ico" href="../../favicon.ico"></link>
+    <style>
+        body {
+          max-width: 600px;
+        }
+
+
+        p > img, figure > img {
+          width: 150%;
+          margin-left: -25%;
+          max-width: 95vw;
+        }
+
+        figure {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        figcaption {
+          display: none;
+        }
+
+        @media (max-width: 900px) {
+          p > img, figure > img {
+            margin-left: calc(-1 * (95vw - 600px)/2);
+          }
+        }
+
+        @media (max-width: 600px) {
+          p > img, figure > img {
+            margin-left: 2.5vw;
+          }
+        }
+      </style>
+  </head>
+
+  <body>
+    <div class="logo-container">
+      <img src="../../logo.jpg" class="logo-image" />
+    </div>
+
+<h2 id="aquecimento-de-programação-em-python">Aquecimento de Programação
+em Python</h2>
+<p><em>Adaptado do <a
+href="https://paca.ime.usp.br/course/view.php?id=1259">oferecimento</a>
+de MAC0110 - Introdução à computação de 2018, professor Marcelo
+Queiroz</em></p>
+<h3 id="introdução">Introdução</h3>
+<p>Neste exercício-programa treinaremos os conhecimentos vistos em aula
+até o momento, como a utilização de operações aritméticas e comparações,
+comandos condicionais (if-else), leitura da entrada (input()), impressão
+de mensagens para o usuário (print), etc. Este será uma ótima
+oportunidade para treinarmos a implementação de um primeiro programa em
+Python.</p>
+<p>O objetivo do EP é implementar um jogo de adivinhação de números, no
+qual o computador pedirá para o usuário responder uma série de questões
+e usará as respostas para “adivinhar” o número pensado. A seção seguinte
+explica o passo-a-passo desse processo de adivinhação.</p>
+<p>Atenção: você não pode usar estruturas que não foram vistas em
+aula.</p>
+<h3 id="jogo-de-adivinhação">Jogo de adivinhação</h3>
+<p>Nesse jogo o usuário deve pensar em um número de 0 a 10, e o
+computador pode fazer até 4 perguntas do tipo “par ou ímpar”, além de
+pedir para o usuário fazer manipulações aritméticas simples, como
+subtrair 1 ou dividir por 2. Você é quem deve descobrir como usar esses
+mecanismos para de fato permitir ao computador adivinhar o número
+pensado… Os dois exemplos abaixo ilustram o comportamento esperado do
+programa:</p>
+<h4 id="exemplo-1">Exemplo 1</h4>
+<pre><code>$ python3 ep0.py
+Pense em um número entre 0 e 10.
+O número é par (digite 0) ou ímpar (digite 1)? 0
+Divida o resultado por 2.
+O número resultante é par (digite 0) ou ímpar (digite 1)? 1
+Subtraia 1 do número.
+Divida o resultado por 2.
+O número resultante é par (digite 0) ou ímpar (digite 1)? 0
+Divida o resultado por 2.
+O número resultante é par (digite 0) ou ímpar (digite 1)? 1
+O número que você pensou é 10 ?
+Digite 1 para sim, 0 para não: 1
+Já consigo ler mentes... agora só me falta dominar o mundo! huahuahua</code></pre>
+<h4 id="exemplo-2">Exemplo 2</h4>
+<pre><code>$ python3 ep0.py
+Pense em um número entre 0 e 10.
+O número é par (digite 0) ou ímpar (digite 1)? 1
+Subtraia 1 do número.
+Divida o resultado por 2.
+O número resultante é par (digite 0) ou ímpar (digite 1)? 1
+Subtraia 1 do número.
+Divida o resultado por 2.
+O número resultante é par (digite 0) ou ímpar (digite 1)? 0
+Divida o resultado por 2.
+O número resultante é par (digite 0) ou ímpar (digite 1)? 0
+O número que você pensou é 3 ?
+Digite 1 para sim, 0 para não: 0
+Até parece! Você que errou nas contas... kkkk</code></pre>
+<p>No seu programa, você deve usar exatamente as frases como aparecem no
+exemplo, para permitir a verifi- cação automática do seu código.</p>
+<h3 id="entrega">Entrega</h3>
+<p>Você deverá entregar um arquivo <code>.py</code> com sua
+implementação do jogo descrito acima.</p>
+<p>Lembre-se de documentar bem o seu código. Além de torná-lo mais
+compreensível para o leitor, seus comentários irão explicitar o que você
+pretendia fazer, caso venha a implementar algo levemente errado.</p>
+<p>Boas implementações! =)</p>
+
+    <br><br>
+    <p class="back"><a href="index.html">π</a></p>
+
+    <br>
+    <p id="lastchange">
+    Última modificação: 23-03-2023
+    </p>
+  </body>

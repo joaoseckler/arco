@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> jseckler </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" type="image/ico" href="../../favicon.ico"></link>
+    <style>
+        body {
+          max-width: 600px;
+        }
+
+
+        p > img, figure > img {
+          width: 150%;
+          margin-left: -25%;
+          max-width: 95vw;
+        }
+
+        figure {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        figcaption {
+          display: none;
+        }
+
+        @media (max-width: 900px) {
+          p > img, figure > img {
+            margin-left: calc(-1 * (95vw - 600px)/2);
+          }
+        }
+
+        @media (max-width: 600px) {
+          p > img, figure > img {
+            margin-left: 2.5vw;
+          }
+        }
+      </style>
+  </head>
+
+  <body>
+    <div class="logo-container">
+      <img src="../../logo.jpg" class="logo-image" />
+    </div>
+
+<h2 id="basic-hangman">Basic Hangman</h2>
+<p><em>Adapted from MIT’s <a
+href="https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/pages/syllabus/">open
+course</a> 6-0001 - Introduction to Computer Science and programming in
+python, as offered in 2016</em></p>
+<p>You will implement a variation of the classic word game Hangman. If
+you are unfamiliar with the rules of the game, read <a
+href="http://en.wikipedia.org/wiki/Hangman_(game)">http://en.wikipedia.org/wiki/Hangman_(game)</a>.
+Don’t be intimidated by this problem ­ it’s actually easier than it
+looks! We will ‘scaffold’ this problem, guiding you through the creation
+of helper functions before you implement the actual game.</p>
+<h3 id="a-getting-started">A) Getting Started</h3>
+<p>Download the files “hangman.py” and “words.txt”, at the end of this
+page, and <strong>save them both in the same directory</strong>. Run the
+file hangman.py before writing any code to ensure your files are saved
+correctly. The code we have given you loads in words from a file. You
+should see the following output in your shell:</p>
+<pre><code>Loading word list from file...
+55900 words loaded.</code></pre>
+<p>If you see the above text, continue on to Hangman Game Requirements.
+If you don’t, double check that both files are saved in the same
+place!</p>
+<h3 id="b-hangman-game-requirements">B) Hangman Game Requirements</h3>
+<p>You will implement a function called <code>hangman</code> that will
+allow the user to play hangman against the computer. The computer picks
+the word, and the player tries to guess letters in the word.</p>
+<p>Here is the general behavior we want to implement. Don’t be
+intimidated! This is just a description; we will break this down into
+steps and provide further functional specs later on in the pset so keep
+reading!</p>
+<ol type="1">
+<li>The computer must select a word at random from the list of available
+words that was provided in words.txt Note that words.txt contains words
+in all lowercase letters.</li>
+<li>The user is given a certain number of guesses at the beginning.</li>
+<li>The game is interactive; the user inputs their guess and the
+computer either:</li>
+</ol>
+<ol type="a">
+<li>reveals the letter if it exists in the secret word</li>
+<li>penalize the user and updates the number of guesses remaining</li>
+</ol>
+<ol start="4" type="1">
+<li>The game ends when either the user guesses the secret word, or the
+user runs out of guesses.</li>
+</ol>
+<h2 id="hangman-part-1-three-helper-functions">Hangman Part 1: Three
+helper functions</h2>
+<p>Before we have you write code to organize the hangman game, we are
+going to break down the problem into logical subtasks, creating three
+helper functions you will need to have in order for this game to work.
+This is a common approach to computational problem solving, and one we
+want you to begin experiencing.</p>
+<p>The file hangman.py has a number of already implemented functions you
+can use while writing up your solution. You can ignore the code in the
+two functions at the top of the file that have already been implemented
+for you, though you should understand how to use each helper function by
+reading the docstrings.</p>
+<h3 id="a-determine-whether-the-word-has-been-guessed">1.A) Determine
+whether the word has been guessed</h3>
+<p>First, implement the function <code>is_word_guessed</code> that takes
+in two parameters ­ a string, <code>secret_word</code>, and a list of
+letters (strings), <code>letters_guessed</code>. This function returns a
+boolean <code>True</code> if <code>secret_word</code> has been guessed
+(i.e., all the letters of <code>secret_word</code> are in
+<code>letters_guessed</code>), and <code>False</code> otherwise. This
+function will be useful in helping you decide when the hangman game has
+been successfully completed, and becomes an end­test for any iterative
+loop that checks letters against the secret word.</p>
+<p>For this function, you may assume that all the letters in
+<code>secret_word</code> and <code>letters_guessed</code> are
+lowercase.</p>
+<p>Example Usage:</p>
+<pre><code>&gt;&gt;&gt; secret_word = &#39;apple&#39;
+&gt;&gt;&gt; letters_guessed = [&#39;e&#39;, &#39;i&#39;, &#39;k&#39;, &#39;p&#39;, &#39;r&#39;, &#39;s&#39;]
+&gt;&gt;&gt; print(is_word_guessed(secret_word, letters_guessed))
+False</code></pre>
+<h3 id="b-getting-the-users-guess">1.B) Getting the user’s guess</h3>
+<p>Next, implement the function <code>get_guessed_word</code> that takes
+in two parameters ­ a string, <code>secret_word</code>, and a list of
+letters, <code>letters_guessed</code>. This function returns a string
+that is comprised of letters and underscores, based on what letters in
+<code>letters_guessed</code> are in <code>secret_word</code>. This
+shouldn’t be too different from <code>is_word_guessed</code>!</p>
+<p>We are going to use an underscore followed by a space (_ ) to
+represent unknown letters. We could have chosen other symbols, but the
+combination of underscore and space is visible and easily discerned.
+Note that the space is super important, as otherwise it hard to
+distinguish whether ____ is four elements long or three. This is called
+usability –­ it’s very important, when programming, to consider the
+usability of your program. If users find your program difficult to
+understand or operate, they won’t use it! We encourage you to think
+about usability when designing your program.</p>
+<p><strong>Hint:</strong> In designing your function, think about what
+information you want to return when done, whether you need a place to
+store that information as you loop over a data structure, and how you
+want to add information to your accumulated result.</p>
+<h4 id="example-usage">Example Usage:</h4>
+<pre><code>&gt;&gt;&gt; secret_word = &#39;apple&#39;
+&gt;&gt;&gt; letters_guessed = [&#39;e&#39;, &#39;i&#39;, &#39;k&#39;, &#39;p&#39;, &#39;r&#39;, &#39;s&#39;]
+&gt;&gt;&gt; print(get_guessed_word(secret_word, letters_guessed))
+&#39;_ pp_ e&#39;</code></pre>
+<h3 id="c-getting-all-available-letters">1.C) Getting all available
+letters</h3>
+<p>Next, implement the function <code>get_available_letters</code> that
+takes in one parameter ­ a list of letters,
+<code>letters_guessed</code>. This function returns a string that is
+comprised of lowercase English letters –­ all lowercase English letters
+that are not in <code>letters_guessed</code>.</p>
+<p>This function should return the letters in alphabetical order. For
+this function, you may assume that all the letters in letters_guessed
+are lowercase.</p>
+<p><strong>Hint:</strong> You might consider using
+<code>string.ascii_lowercase</code>, which is a string comprised of all
+lowercase letters:</p>
+<pre><code>&gt;&gt;&gt; import string
+&gt;&gt;&gt; print(string.ascii_lowercase)
+abcdefghijklmnopqrstuvwxyz</code></pre>
+<p>Example Usage:</p>
+<pre><code>&gt;&gt;&gt; letters_guessed = [&#39;e&#39;, &#39;i&#39;, &#39;k&#39;, &#39;p&#39;, &#39;r&#39;, &#39;s&#39;]
+&gt;&gt;&gt; print get_available_letters(letters_guessed)
+abcdfghjlmnoqtuvwxyz</code></pre>
+<h2 id="hangman-part-2-the-game">Hangman Part 2: The Game</h2>
+<p>Now that you have built some useful functions, you can turn to
+implementing the function <code>hangman</code>, which takes one
+parameter:­ the <code>secret_word</code> the user is to guess.</p>
+<p>Initially, you can (and should!) manually set this secret word when
+you run this function – this will make it easier to test your code. But
+in the end, you will want the computer to select this secret word at
+random before inviting you or some other user to play the game by
+running this function.</p>
+<p>Calling the <code>hangman</code>function starts up an interactive
+game of Hangman between the user and the computer. In designing your
+code, be sure you take advantage of the three helper functions,
+<code>is_word_guessed</code>, <code>get_guessed_word</code>, and
+<code>get_available_letters</code>, that you’ve defined in the previous
+part!</p>
+<p>Below are the game requirements broken down in different categories.
+Make sure your implementation fits all the requirements!</p>
+<h3 id="game-requirements">Game Requirements</h3>
+<h4 id="a.-game-architecture">A. Game Architecture:</h4>
+<ol type="1">
+<li>The computer must select a word at random from the list of available
+words that was provided in words.txt. The functions for loading the word
+list and selecting a random word have already been provided for you in
+hangman.py.</li>
+<li>Users start with 6 guesses.</li>
+<li>At the start of the game, let the user know how many letters the
+computer’s word contains and how many guesses s/he starts with.</li>
+<li>The computer keeps track of all the letters the user has not guessed
+so far and before each turn shows the user the “remaining letters”</li>
+</ol>
+<p><strong>Example Game Implementation:</strong></p>
+<pre><code>Loading word list from file...
+55900 words loaded.
+Welcome to the game Hangman!
+I am thinking of a word that is 4 letters long.
+-------------
+You have 6 guesses left.
+Available letters: abcdefghijklmnopqrstuvwxyz</code></pre>
+<h4 id="b.-user-computer-interaction">B. User-­Computer
+Interaction:</h4>
+<p>The game must be interactive and flow as follows:</p>
+<ol type="1">
+<li>Before each guess, you should display to the user:</li>
+</ol>
+<ol type="a">
+<li>Remind the user of how many guesses s/he has left after each
+guess.</li>
+<li>all the letters the user has not yet guessed</li>
+</ol>
+<ol start="2" type="1">
+<li>Ask the user to supply one guess at a time. (Look at the user input
+requirements below to see what types of inputs you can expect from the
+user)</li>
+<li>Immediately after each guess, the user should be told whether the
+letter is in the computer’s word.</li>
+<li>After each guess, you should also display to the user the computer’s
+word, with guessed letters displayed and unguessed letters replaced with
+an underscore and space (_ )</li>
+<li>At the end of the guess, print some dashes (­­­­­) to help separate
+individual guesses from each other</li>
+</ol>
+<p><strong>Example Game Implementation:</strong></p>
+<p>(The <strong>blue</strong> color below is only there to show you what
+the user typed in, as opposed to what the computer output.)</p>
+<pre><code>You have 6 guesses left.
+Available letters: abcdefghijklmnopqrstuvwxyz
+Please guess a letter: a
+Good guess: _ a_ _
+------------
+You have 6 guesses left.
+Available letters: bcdefghijklmnopqrstuvwxyz
+Please guess a letter: b
+Oops! That letter is not in my word: _ a_ _</code></pre>
+<h4 id="c.-user-input-requirements">C. User Input Requirements:</h4>
+<ol type="1">
+<li>You may assume that the user will only guess one character at a
+time, but the user can choose any number, symbol or letter. Your code
+should accept capital and lowercase letters as valid guesses!</li>
+<li>If the user inputs anything besides an alphabet (symbols, numbers),
+tell the user that they can only input an alphabet. Because the user
+might do this by accident, they should get 3 warnings at the beginning
+of the game. Each time they enter an invalid input, or a letter they
+have already guessed, they should lose a warning. If the user has no
+warnings left and enters an invalid input, they should lose a
+guess.</li>
+</ol>
+<p><strong>Hint #1</strong>: Use calls to the <code>input</code>
+function to get the user’s guess.</p>
+<ol type="a">
+<li>Check that the user input is an alphabet</li>
+<li>If the user does not input an uppercase or lowercase alphabet
+letter, subtract one warning or one guess.</li>
+</ol>
+<p><strong>Hint #2</strong>: you may find the string functions
+<code>str.isalpha(‘your string’)</code> and
+<code>str.lower(‘Your String’)</code> helpful! If you don’t know what
+these functions are you could try typing <code>help(str.isalpha)</code>
+or <code>help(str.lower)</code> in your Spyder shell to see the
+documentation for the functions.</p>
+<p><strong>Hint #3</strong>: Since the words in words.txt are lowercase,
+it might be easier to convert the user input to lowercase at all times
+and have your game only handle lowercase.</p>
+<p><strong>Example Game Implementation:</strong></p>
+<pre><code>You have 3 warnings left.
+You have 6 guesses left.
+Available letters: bcdefghijklmnopqrstuvwxyz
+Please guess a letter: s
+Oops! That letter is not in my word: _ a_ _
+------------
+You have 5 guesses left.
+Available letters: bcdefghijklmnopqrtuvwxyz
+Please guess a letter: $
+Oops! That is not a valid letter. You have 2 warnings left:
+_ a_ _</code></pre>
+<h4 id="d.-game-rules">D. Game Rules:</h4>
+<ol type="1">
+<li>The user starts with 3 warnings.</li>
+<li>If the user inputs anything besides an alphabet (symbols, numbers),
+tell the user that they can only input an alphabet.</li>
+</ol>
+<ol type="a">
+<li>If the user has one or more warning left, the user should lose one
+warning. Tell the user the number of remaining warnings.</li>
+<li>If the user has no remaining warnings, they should lose one
+guess.</li>
+</ol>
+<ol start="3" type="1">
+<li>If the user inputs a letter that has already been guessed, print a
+message telling the user the letter has already been guessed
+before.</li>
+</ol>
+<ol type="a">
+<li>If the user has one or more warning left, the user should lose one
+warning. Tell the user the number of remaining warnings.</li>
+<li>If the user has no warnings, they should lose one guess.</li>
+</ol>
+<ol start="4" type="1">
+<li>If the user inputs a letter that hasn’t been guessed before and the
+letter is in the secret word, the user loses no guesses.</li>
+<li>Consonants: If the user inputs a consonant that hasn’t been guessed
+and the consonant is not in the secret word, the user loses
+<strong>one</strong> guess if it’s a consonant.</li>
+<li>Vowels: If the vowel hasn’t been guessed and the vowel is not in the
+secret word, the user loses <strong>two</strong> guesses. Vowels are a,
+e, i , o, and u. y does not count as a vowel.</li>
+</ol>
+<p><strong>Example Implementation:</strong></p>
+<pre><code>You have 5 guesses left.
+Available letters: bcdefghijklmnopqrtuvwxyz
+Please guess a letter: t
+Good guess: ta_ t
+------------
+You have 5 guesses left.
+Available letters: bcdefghijklmnopqrtuvwxyz
+Please guess a letter: e
+Oops! That letter is not in my word: ta_ t
+------------
+You have 3 guesses left.
+Available letters: bcdfghijklmnopqrtuvwxyz
+Please guess a letter: e
+Oops! You&#39;ve already guessed that letter. You now have 2 warnings:
+ta_ t</code></pre>
+<h4 id="e.-game-termination">E. Game Termination:</h4>
+<ol type="1">
+<li>The game should end when the user constructs the full word or runs
+out of guesses.</li>
+<li>If the player runs out of guesses before completing the word, tell
+them they lost and reveal the word to the user when the game ends.</li>
+<li>If the user wins, print a congratulatory message and tell the user
+their score.</li>
+<li>The total score is the number of <code>guesses_remaining</code> once
+the user has guessed the secret_word times the number of unique letters
+in <code>secret_word</code>. Total score = guesses_remaining × number
+unique letters in <code>secret_word</code></li>
+</ol>
+<p><strong>Example Implementation:</strong></p>
+<pre><code>You have 3 guesses left.
+Available letters: bcdfghijklnopquvwxyz
+Please guess a letter: c
+Good guess: tact
+------------
+Congratulations, you won!
+Your total score for this game is: 9
+Example Implementation:
+You have 3 guesses left.
+Available letters: bcdfghijklnopquvwxyz
+Please guess a letter: n
+Good guess: dolphin
+------------
+Congratulations, you won!
+Your total score for this game is: 21</code></pre>
+<h4 id="f.-general-hints">F. General Hints:</h4>
+<ol type="1">
+<li>Consider writing additional helper functions if you need them.</li>
+<li>There are four important pieces of information you may wish to
+store:</li>
+</ol>
+<ol type="a">
+<li><code>secret_word</code>: The word to guess. This is already used as
+the parameter name for the <code>hangman</code> function.</li>
+<li><code>letters_guessed</code>: The letters that have been guessed so
+far. If they guess a letter that is already in
+<code>letters_guessed</code>, you should print a message telling them
+they’ve already guessed that but do not penalize them for it.</li>
+<li><code>guesses_remaining</code>: The number of guesses the user has
+left. Note that in our example game, the penalty for choosing an
+incorrect vowel is different than the penalty for choosing an incorrect
+consonant.</li>
+<li><code>warnings_remaining</code>: The number of warnings the user has
+left. Note that a user only loses a warning for inputting either a
+symbol or a letter that has already been guessed.</li>
+</ol>
+<h4 id="g.-example-game">G. Example Game:</h4>
+<p>Look carefully at the examples given above of running
+<code>hangman</code>, as that suggests examples of information you will
+want to print out after each guess of a letter.</p>
+<p>Note: Try to make your print statements as close to the example game
+as possible!</p>
+<p>The output of a <strong>winning</strong> game should look like this.
+(The blue color below is only there to show you what the user typed in,
+as opposed to what the computer output.)</p>
+<pre><code>Loading word list from file...
+55900 words loaded.
+Welcome to the game Hangman!
+I am thinking of a word that is 4 letters long.
+You have 3 warnings left.
+-------------
+You have 6 guesses left.
+Available letters: abcdefghijklmnopqrstuvwxyz
+Please guess a letter: a
+Good guess: _ a_ _
+------------
+You have 6 guesses left.
+Available letters: bcdefghijklmnopqrstuvwxyz
+Please guess a letter: a
+Oops! You&#39;ve already guessed that letter. You have 2 warnings left:
+_ a_ _
+------------
+You have 6 guesses left.
+Available letters: bcdefghijklmnopqrstuvwxyz
+Please guess a letter: s
+Oops! That letter is not in my word.
+Please guess a letter: _ a_ _
+------------
+You have 5 guesses left.
+Available letters: bcdefghijklmnopqrtuvwxyz
+Please guess a letter: $
+Oops! That is not a valid letter. You have 1 warnings left: _ a_ _
+------------
+You have 5 guesses left.
+Available letters: bcdefghijklmnopqrtuvwxyz
+Please guess a letter: t
+Good guess: ta_ t
+------------
+You have 5 guesses left.
+Available letters: bcdefghijklmnopqrtuvwxyz
+Please guess a letter: e
+Oops! That letter is not in my word: ta_ t
+------------
+You have 3 guesses left.
+Available letters: bcdfghijklmnopqrtuvwxyz
+Please guess a letter: e
+Oops! You&#39;ve already guessed that letter. You have 0 warnings left:
+ta_ t
+------------
+You have 3 guesses left.
+Available letters: bcdfghijklmnopqrtuvwxyz
+Please guess a letter: e
+Oops! You&#39;ve already guessed that letter. You have no warnings left
+so you lose one guess: ta_ t
+8------------
+You have 2 guesses left.
+Available letters: bcdfghijklnopquvwxyz
+Please guess a letter: c
+Good guess: tact
+------------
+Congratulations, you won!
+Your total score for this game is: 6</code></pre>
+<p>And the output of a <strong>losing</strong> game should look like
+this…</p>
+<pre><code>Loading word list from file...
+55900 words loaded.
+Welcome to the game Hangman!
+I am thinking of a word that is 4 letters long
+You have 3 warnings left.
+-----------
+You have 6 guesses left
+Available Letters: abcdefghijklmnopqrstuvwxyz
+Please guess a letter: a
+Oops! That letter is not in my word: _ _ _ _
+-----------
+You have 4 guesses left
+Available Letters: bcdefghijklmnopqrstuvwxyz
+Please guess a letter: b
+Oops! That letter is not in my word: _ _ _ _
+-----------
+You have 3 guesses left
+Available Letters: cdefghijklmnopqrstuvwxyz
+Please guess a letter: c
+Oops! That letter is not in my word: _ _ _ _
+-----------
+You have 2 guesses left
+Available Letters: defghijklmnopqrstuvwxyz
+Please guess a letter: 2
+Oops! That is not a valid letter. You have 2 warnings left: _ _ _ _
+­­­­­­­­­­­
+You have 2 guesses left
+Available Letters: defghijklmnopqrstuvwxyz
+Please guess a letter: d
+Oops! That letter is not in my word: _ _ _ _
+-----------
+You have 1 guesses left
+Available Letters: efghijklmnopqrstuvwxyz
+Please guess a letter: e
+Good guess: e_ _ e
+-----------
+You have 1 guesses left
+Available Letters: fghijklmnopqrstuvwxyz
+Please guess a letter: f
+9Oops! That letter is not in my word: e_ _ e
+-----------
+Sorry, you ran out of guesses. The word was else.</code></pre>
+<p>Once you have completed and tested your code (where you have manually
+provided the “secret” word, since knowing it helps you debug your code),
+you may want to try running against the computer. If you scroll down to
+the bottom of the file we provided, you will see two commented lines
+underneath the text</p>
+<pre><code>if __name__ == “__main__”:
+    #secret_word = choose_word(wordlist)
+    #hangman(secret_word)</code></pre>
+<p>These lines use functions we have provided (near the top of
+hangman.py), which you may want to examine. Try “uncommenting” these
+lines, and reloading your code. This will give you a chance to try your
+skill against the computer, which uses our functions to load a large set
+of words and then pick one at random.</p>
+<h2 id="hangman-part-3-the-game-with-hints">Hangman Part 3: The Game
+with Hints</h2>
+<p>If you have tried playing Hangman against the computer, you may have
+noticed that it isn’t always easy to beat the computer, especially when
+it selects an esoteric word (like “esoteric”!). It might be nice if you
+could ask the computer for a hint, such as a list of all the words that
+match what you have currently guessed.</p>
+<p>For example, if the hidden word is “tact”, and you have so far
+guessed the letter “t”, so that you know the solution is “t_ _ t”, where
+you need to guess the two missing letters, it might be nice to know that
+the set of matching words (at least based on what the computer initially
+loaded) are: tact tart taut teat tent test text that tilt tint toot tort
+tout trot tuft twit We are going to have you create a variation of
+Hangman (we call this <code>hangman_with_hints</code>, and have provided
+an initial scaffold for writing it), with the property that if you guess
+the special character * the computer will find all the words from its
+loaded list that might match your current guessed word, and print out
+each of them. Of course, we don’t recommend trying this at the first
+step, since this will print out all 55,900 words that we loaded! But if
+you are getting close to an answer and are running out of guesses, this
+might help.</p>
+<p>To do this, we are going to ask you to first complete two helper
+functions:</p>
+<h3 id="a-matching-the-current-guessed-word">3.A) Matching the current
+guessed word</h3>
+<p><code>match_with_gap</code> takes two parameters:
+<code>my_word</code> and <code>other_word</code>. <code>my_word</code>
+is an instance of a guessed word, in other words, it may have some _ ’s
+in places (such as ‘t_ _ t’). <code>other_word</code> is a normal
+English word.</p>
+<p>This function should return <code>True</code> if the guessed letters
+of <code>my_word</code> match the corresponding letters of
+<code>other_word</code>. It should return <code>False</code> if the two
+words are not of the same length or if a guessed letter in
+<code>my_word</code> does not match the corresponding character in
+<code>other_word</code>.</p>
+<p>Remember that when a letter is guessed, your code reveals all the
+positions at which that letter occurs in the secret word. Therefore, the
+hidden letter (_ ) <strong>cannot be</strong> done of the letters in the
+word that has already been revealed.</p>
+<p><strong>Example Usage:</strong></p>
+<pre><code>&gt;&gt;&gt; match_with_gaps(&quot;te_ t&quot;, &quot;tact&quot;)
+False
+&gt;&gt;&gt; match_with_gaps(&quot;a_ _ le&quot;, &quot;banana&quot;)
+False
+&gt;&gt;&gt; match_with_gaps(&quot;a_ _ le&quot;, &quot;apple&quot;)
+True
+&gt;&gt;&gt; match_with_gaps(&quot;a_ ple&quot;, &quot;apple&quot;)
+False</code></pre>
+<p>Hint: You may want to use <code>strip()</code> to get rid of the
+spaces in the word to compare lengths.</p>
+<h3 id="b-showing-all-possible-matches">3.B) Showing all possible
+matches</h3>
+<p><code>show_possible_matches</code> takes a single parameter:
+<code>my_word</code> which is an instance of a guessed word, in other
+words, it may have some _ ’s in places (such as ‘t_ _ t’).</p>
+<p>This function should print out all words in <code>wordlist</code>
+(notice where we have defined this at the beginning of the file, line
+51) that match <code>my_word</code>. It should print “No matches found”
+if there are no matches.</p>
+<p><strong>Example Usage:</strong></p>
+<pre><code>&gt;&gt;&gt; show_possible_matches(&quot;t_ _ t&quot;)
+tact tart taut teat tent test text that tilt tint toot tort tout trot tuft
+twit
+&gt;&gt;&gt; show_possible_matches(&quot;abbbb_ &quot;)
+No matches found
+&gt;&gt;&gt; show_possible_matches(&quot;a_ pl_ &quot;)
+ample amply</code></pre>
+<h3 id="c-hangman-with-hints">3.C) Hangman with hints</h3>
+<p>Now you should be able to replicate the code you wrote for
+<code>hangman</code> as the body of <code>hangman_with_hints</code>,
+then make a small addition to allow for the case where the user can
+guess an asterisk (*), in which case the computer will print out all the
+words that match that guess.</p>
+<p>The user should not lose a guess if the guess is an asterisk.</p>
+<p>Comment out the lines of code you used to play the original Hangman
+game:</p>
+<pre><code>    secret_word = choose_word(wordlist)
+    hangman(secret_word)</code></pre>
+<p>And un­comment out these lines of code we’ve provided at the bottom
+of the file to play your new game Hangman with Hints:</p>
+<pre><code>    #secret_word = choose_word(wordlist)
+    #hangman_with_hints(secret_word)</code></pre>
+<p><strong>Sample Output:</strong></p>
+<p>The output from guessing an asterisk should look like the sample
+output below. All other output should follow the Hangman game described
+in Part 2 above.</p>
+<pre><code>Loading word list from file...
+55900 words loaded.
+Welcome to the game Hangman!
+I am thinking of a word that is 5 letters long.
+--------
+You have 6 guesses left.
+Available letters: abcdefghijklmnopqrstuvwxyz
+Please guess a letter: a
+Good guess: a_ _ _ _
+--------
+You have 6 guesses left.
+Available letters: bcdefghijklmnopqrstuvwxyz
+Please guess a letter: l
+Good guess: a_ _ l_
+--------
+You have 6 guesses left.
+Available letters: bcdefghijkmnopqrstuvwxyz
+Please guess a letter: \*
+Possible word matches are:
+addle adult agile aisle amble ample amply amyls angle ankle apple
+apply aptly arils atilt
+--------
+You have 6 guesses left.
+Available letters: bcdefghijkmnopqrstuvwxyz
+Please guess a letter: e
+Good guess: a_ _ le
+--------</code></pre>
+<p>This completes the task!</p>
+<h3 id="files">Files</h3>
+<ul>
+<li><a href="hangman.py">hangman.py</a></li>
+<li><a href="words.txt">words.txt</a></li>
+</ul>
+
+    <br><br>
+    <p class="back"><a href="index.html">π</a></p>
+
+    <br>
+    <p id="lastchange">
+    Última modificação: 23-03-2023
+    </p>
+  </body>

@@ -1,6 +1,6 @@
 ## Gerador de Poesia Pseudo-Dadaísta
 
-_Adaptado do (oferecimento)[https://paca.ime.usp.br/course/view.php?id=1259]
+_Adaptado do [oferecimento](https://paca.ime.usp.br/course/view.php?id=1259)
 de MAC0110 - Introdução à computação de 2018, professor Marcelo Queiroz_
 
 ### Introdução

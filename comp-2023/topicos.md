@@ -26,7 +26,7 @@
   1. Atribuição (dar um valor a uma variável), por exemplo, `x = 4`.
      Repare que o lado direito do simbolo de `=` é sempre uma expressão,
      cujo valor é armazenado na variável.
-  2. Importar uma biblioteca, por exemplo,`import math`
+  2. Importar uma biblioteca, por exemplo, `import math`
 
 ### Tipos
 
@@ -36,6 +36,19 @@
 * `float`: número real ("quebrado")
 * `str`: string (cadeia de caracteres, texto)
 * `bool`: booleano (`True` ou `False`, sim ou não, verdadeiro ou falso)
+
+Veja abaixo também a função `type`, que nos diz qual é o tipo de uma
+expressão. Vimos também que podemos converter de um tipo para outro
+usando o nome do tipo como se fosse uma função:
+
+```python
+>>> int("34")
+34
+>>> type("34")
+<class 'str'>
+>>> type(int("34"))
+<class 'int'>
+```
 
 ### Erro
 
@@ -68,6 +81,41 @@ ordem que escolhermos (diferente da matemática convencional, aqui só
 podemos usar o parênteses para esse propósito. O colchete (`[`) e as
 chaves (`{`) tem outras funções).
 
+### Funções embutidas
+
+* `len`: devolve o comprimento de uma string (ou de outros tipos que se
+  apliquem).
+
+  ```python
+  >>> len("Olá, mundo!")
+  11
+  ```
+
+* `type`: Nos diz qual é o tipo da expressão. Exemplo
+
+  ```python
+  >>> type(34)
+  <class 'int'>
+  >>> type(3.3)
+  <class 'float'>
+  >>> type("Olá!")
+  <class 'str'>
+  >>> type(4 == 4)
+  <class 'bool'>
+  ```
+
+* `min` e `max`: Nos devolve o menor e o maior elemento de um conjunto
+  de valores, respectivamente.
+
+  ```python
+  >>> min(18, -10, 5)
+  -10
+  >>> min("Alice", "Bruno", "Carla")
+  'Alice'
+  >>> max(3.88, 3.5, 4.2)
+  4.2
+  ```
+
 ### Operadores booleanos
 
 São aqueles operadores que nos dão um valor booleano. Por exemplo:
@@ -81,13 +129,12 @@ True
 * `<`
 * `==` (Não confundir com `=`, usado para atribuir valores a variáveis!)
 * `>=`
-* `<=`
-
-[//]: <> (* `and`)
-[//]: <> (* `or`)
-[//]: <> (* `not`)
-[//]: <> (* `in`)
-[//]: <> (* `is`)
+* `<=` <!--
+* `and`
+* `or`
+* `not`
+* `in`
+* `is`-->
 
 ### Operações com strings
 

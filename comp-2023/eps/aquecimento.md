@@ -1,28 +1,21 @@
 ## Aquecimento de Programação em Python
 
-_Adaptado do (oferecimento)[https://paca.ime.usp.br/course/view.php?id=1259]
+_Adaptado do [oferecimento](https://paca.ime.usp.br/course/view.php?id=1259)
 de MAC0110 - Introdução à computação de 2018, professor Marcelo Queiroz_
 
 
 ### Introdução
 
-Neste exercício-programa treinaremos os conhecimentos vistos em aula até o momento, como a utiliza-
-ção de operações aritméticas e comparações, comandos condicionais (if-else), leitura da entrada (input()),
-impressão de mensagens para o usuário (print), etc. Este será uma ótima opor-
-tunidade para treinarmos a implementação de um primeiro programa em Python.
+Neste exercício-programa treinaremos os conhecimentos vistos em aula até o momento, como a utilização de operações aritméticas e comparações, comandos condicionais (if-else), leitura da entrada (input()),
+impressão de mensagens para o usuário (print), etc. Este será uma ótima oportunidade para treinarmos a implementação de um primeiro programa em Python.
 
-O objetivo do EP é implementar um jogo de adivinhação de números, no qual o computador pedirá para o
-usuário responder uma série de questões e usará as respostas para “adivinhar” o número pensado. A seção
-seguinte explica o passo-a-passo desse processo de adivinhação.
+O objetivo do EP é implementar um jogo de adivinhação de números, no qual o computador pedirá para o usuário responder uma série de questões e usará as respostas para “adivinhar” o número pensado. A seção seguinte explica o passo-a-passo desse processo de adivinhação.
 
 Atenção: você não pode usar estruturas que não foram vistas em aula.
 
 ### Jogo de adivinhação
 
-Nesse jogo o usuário deve pensar em um número de 0 a 10, e o computador pode fazer até 4 perguntas do
-tipo “par ou ímpar”, além de pedir para o usuário fazer manipulações aritméticas simples, como subtrair
-1 ou dividir por 2. Você é quem deve descobrir como usar esses mecanismos para de fato permitir ao
-computador adivinhar o número pensado... Os dois exemplos abaixo ilustram o comportamento esperado
+Nesse jogo o usuário deve pensar em um número de 0 a 10, e o computador pode fazer até 4 perguntas do tipo “par ou ímpar”, além de pedir para o usuário fazer manipulações aritméticas simples, como subtrair 1 ou dividir por 2. Você é quem deve descobrir como usar esses mecanismos para de fato permitir ao computador adivinhar o número pensado... Os dois exemplos abaixo ilustram o comportamento esperado
 do programa:
 
 #### Exemplo 1

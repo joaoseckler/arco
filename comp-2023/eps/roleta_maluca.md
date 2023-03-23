@@ -1,6 +1,6 @@
 ## Roleta Maluca
 
-_Adaptado do (oferecimento)[https://paca.ime.usp.br/course/view.php?id=1259]
+_Adaptado do [oferecimento](https://paca.ime.usp.br/course/view.php?id=1259)
 de MAC0110 - Introdução à computação de 2018, professor Marcelo Queiroz_
 
 ### Introdução
@@ -9,7 +9,7 @@ Nesse EP nós vamos implementar em Python3 um jogo de roleta com um twist: nessa
 números disponível é configurável e os números sorteados possuem probabilidades diferentes de aparecer;
 alguns podem até nem ser sorteáveis!
 
-![roleta](roleta.jpg)
+![roleta](roleta.png)
 
 As próximas seções explicam como implementar esse tipo de sorteio enviesado e como deve funcionar o
 jogo. O enunciado traz também algumas funções de implementação obrigatória, que lhe servirão de
@@ -35,12 +35,12 @@ representação decimal do número inteiro dist.
 Uma vez estabelecidos os valores de N e dist, resta saber como gerar valores aleatórios entre 0 e N-1 com a
 mesma distribuição de probabilidade daquela roleta em estrutura radial com os pesos fixados. Note que se
 
-TODO: copiar fórmula
+<div style="text-align: center"><img src="formula1.png" style="height: 5em; width: auto;" alt="Somatória de n=0 até N maiúsculo menos 1 de p subscrito n" title="Fórmula 1"></div>
 
 então as probabilidades associadas a cada valor n devem ser iguais a pn /S, e a probabilidade de sorteio de
 um valor qualquer menor ou igual a n deve ser .
 
-TODO: copiar fórmula
+<div style="text-align: center"><img src="formula2.png" style="height: 5em;width: auto;" alt="Somatória de j=0 até n de p subscrito n, tudo isso sobre S" title="Fórmula 2"></div>
 
 Isso sugere o seguinte algoritmo para gerar um valor aleatório conforme essa distribuição:
 
